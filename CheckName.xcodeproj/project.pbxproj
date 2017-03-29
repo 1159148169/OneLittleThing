@@ -13,6 +13,7 @@
 		8B1590BC1E2CF004003B2197 /* TypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1590BB1E2CF004003B2197 /* TypeTableViewCell.swift */; };
 		8B75DDBE1DDB24A200D038E1 /* DZNEmptyDataSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B75DDBD1DDB24A200D038E1 /* DZNEmptyDataSet.framework */; };
 		8B7F8F391DDC8FA000A622D9 /* NewTypeListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F8F381DDC8FA000A622D9 /* NewTypeListTableViewController.swift */; };
+		8B869D4A1E8A51BA00159024 /* SideBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B869D491E8A51BA00159024 /* SideBarController.swift */; };
 		8B8820161E2B6E8300CE851A /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8820151E2B6E8300CE851A /* SWRevealViewController.m */; };
 		8B8820181E2B830B00CE851A /* QuickPlanTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8820171E2B830B00CE851A /* QuickPlanTableViewController.swift */; };
 		8B88201A1E2B832000CE851A /* TimePlanTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8820191E2B832000CE851A /* TimePlanTableViewController.swift */; };
@@ -40,6 +41,7 @@
 		8B75DDBD1DDB24A200D038E1 /* DZNEmptyDataSet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DZNEmptyDataSet.framework; path = Carthage/Build/iOS/DZNEmptyDataSet.framework; sourceTree = "<group>"; };
 		8B75DDC11DDB2CAE00D038E1 /* CheckName-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CheckName-Bridging-Header.h"; sourceTree = "<group>"; };
 		8B7F8F381DDC8FA000A622D9 /* NewTypeListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTypeListTableViewController.swift; sourceTree = "<group>"; };
+		8B869D491E8A51BA00159024 /* SideBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarController.swift; sourceTree = "<group>"; };
 		8B8820141E2B6E8300CE851A /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		8B8820151E2B6E8300CE851A /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		8B8820171E2B830B00CE851A /* QuickPlanTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickPlanTableViewController.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				8B8820171E2B830B00CE851A /* QuickPlanTableViewController.swift */,
 				8B8820191E2B832000CE851A /* TimePlanTableViewController.swift */,
 				8B88201B1E2B833400CE851A /* ImportantPlanTableViewController.swift */,
+				8B869D491E8A51BA00159024 /* SideBarController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B869D4A1E8A51BA00159024 /* SideBarController.swift in Sources */,
 				8B7F8F391DDC8FA000A622D9 /* NewTypeListTableViewController.swift in Sources */,
 				8B1590BC1E2CF004003B2197 /* TypeTableViewCell.swift in Sources */,
 				8B88201A1E2B832000CE851A /* TimePlanTableViewController.swift in Sources */,
