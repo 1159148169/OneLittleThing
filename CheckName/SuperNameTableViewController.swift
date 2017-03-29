@@ -47,6 +47,9 @@ class SuperNameTableViewController: UITableViewController,AddNewListTypeDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.revealViewController().tapGestureRecognizer()
+        self.revealViewController().panGestureRecognizer()
+        
         //判断屏幕是否支持3d touch
         /*if traitCollection.forceTouchCapability == .available {
             registerForPreviewing(with: self, sourceView: tableView) //这里的sourceView指的是触发peek动作的view
@@ -116,6 +119,7 @@ class SuperNameTableViewController: UITableViewController,AddNewListTypeDelegate
         // Configure the cell...
         
         //configure right buttons
+        
         cell.rightButtons = [MGSwipeButton(title: "删除", backgroundColor: UIColor.red, callback: {
             (sender: MGSwipeTableCell!) -> Bool in
             print("Convenience callback for swipe buttons!")
@@ -128,6 +132,7 @@ class SuperNameTableViewController: UITableViewController,AddNewListTypeDelegate
             }
             return true
         })]
+        
         cell.rightSwipeSettings.transition = MGSwipeTransition.clipCenter
 
         return cell
