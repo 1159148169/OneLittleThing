@@ -50,6 +50,9 @@ class AddNameListTableViewController: UITableViewController,UITextFieldDelegate 
     }
     
     @IBAction func done() {
+        
+        let hudView = HudView.hud(inView: navigationController!.view, animated: true)
+        
         if let nameToEdit = nameToEdit { //nameToEdit
             nameToEdit.name = textField.text!
             
@@ -60,7 +63,13 @@ class AddNameListTableViewController: UITableViewController,UITextFieldDelegate 
             
             nameToEdit.scheduleNotification()
             
-            delegate?.editItemViewControllerDidDone(self, didFinishEditing: nameToEdit)
+            hudView.text = "已更新"
+            
+            let delayInSeconds = 0.6
+            DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds, execute: { 
+                self.delegate?.editItemViewControllerDidDone(self, didFinishEditing: nameToEdit)
+            })
+            
         } else {
             let newName = NameItem() //newName
             newName.name = textField.text!
@@ -73,7 +82,13 @@ class AddNameListTableViewController: UITableViewController,UITextFieldDelegate 
             
             newName.scheduleNotification()
             
-            delegate?.addItemViewControllerDidDone(self, didFinishAdding: newName)
+            hudView.text = "已添加"
+            
+            let delayInSeconds = 0.6
+            DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds, execute: {
+                self.delegate?.addItemViewControllerDidDone(self, didFinishAdding: newName)
+            })
+            
         }
     }
     

@@ -48,7 +48,10 @@ class SuperNameTableViewController: UITableViewController,AddNewListTypeDelegate
         super.viewDidLoad()
         
         self.revealViewController().tapGestureRecognizer()
-        self.revealViewController().panGestureRecognizer()
+        self.tableView.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        
+//        let panGestureRecognizer = UITapGestureRecognizer(target: self.revealViewController, action: #selector(SWRevealViewController.revealToggle(_:)))
+//        self.tableView.addGestureRecognizer(panGestureRecognizer)
         
         //判断屏幕是否支持3d touch
         /*if traitCollection.forceTouchCapability == .available {
