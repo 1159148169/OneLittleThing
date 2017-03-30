@@ -161,7 +161,7 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
         
         getLocation()
         
-        let delayInSeconds = 1.5
+        let delayInSeconds = 2.0
         DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds, execute: { // 暂时只能使用延迟执行使定位先于网络请求执行
             
             self.dataTask?.cancel()
