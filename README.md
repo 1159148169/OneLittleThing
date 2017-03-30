@@ -1,5 +1,9 @@
 # 小事一桩
-Checklist的上架版本(1.0)
+Checklist的上架版本(1.1)
+
+部分截图：
+
+
 
 基本功能及涉及到的知识点:
 * 使用MVC设计模式；
@@ -17,6 +21,8 @@ Checklist的上架版本(1.0)
 * 界面改版，看起来顺眼了一些；
 * 新增侧滑界面；
 * 增加了时间线、快速计划、重要计划三个分类；
+* 在侧滑界面新增了天气显示，定位服务使用CoreLocation，网络请求使用URLSession，天气信息的接口是一个朋友提供的，非常感谢！
+* 新增计划或更新计划时会弹出一个HUD视图，提升了用户体验；
 
 使用的第三方库（对牛X的作者表示由衷的感谢）：
 * [DZNEmptyDataSet](https://github.com/dzenbot/DZNEmptyDataSet)：非常出名的空页面解决方案；
@@ -28,4 +34,4 @@ Checklist的上架版本(1.0)
 * [TextFieldEffects](https://github.com/raulriera/TextFieldEffects)：UITextField的扩展，增加了一些好看的效果；
 * [SWRevealViewController](https://github.com/John-Lluch/SWRevealViewController)：通过简单的步骤实现一个侧滑页面。
 
-还有一些其他的想法，比如启动页，注册登录，实时显示天气等等杂七杂八的功能，再慢慢往上加。
+还有一些其他的想法，比如启动页，注册登录等等杂七杂八的功能，再慢慢往上加。
