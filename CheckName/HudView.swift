@@ -18,6 +18,7 @@ class HudView: UIView {
         view.isUserInteractionEnabled = false
         
         hudView.show(animated: animated)
+        
         return hudView
     }
     
