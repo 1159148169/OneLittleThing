@@ -6,7 +6,6 @@ App Store链接：[小事一桩](https://itunes.apple.com/cn/app/%E5%B0%8F%E4%BA
 部分截图：
 
 ![image](http://a5.mzstatic.com/us/r30/Purple111/v4/ce/29/d5/ce29d5c5-384d-c5e4-1284-f97cf4e463d6/screen696x696.jpeg)
-
 ![image](http://a5.mzstatic.com/us/r30/Purple122/v4/7a/34/1d/7a341d88-2b02-70d6-e5d5-70c452c2b7c3/screen696x696.jpeg)
 
 基本功能及涉及到的知识点:
