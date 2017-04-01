@@ -88,7 +88,30 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
         
         let item = allType[count].items[indexPath.row]
         
-        label.text = item.name
+        
+        
+        // 设置计划字体及下划线格式，用作删除线
+        var attributes: [String: Any] = [NSFontAttributeName: UIFont.systemFont(ofSize: 20)];
+        
+        if item.charge == true {
+            attributes[NSForegroundColorAttributeName] = UIColor.lightGray
+            attributes[NSStrikethroughStyleAttributeName] = NSUnderlineStyle.styleSingle.rawValue
+        } else {
+            attributes[NSForegroundColorAttributeName] = UIColor.black
+        }
+        label.attributedText = NSAttributedString(string: item.name, attributes: attributes)
+        
+        // 设置重要、提醒字体及下划线格式，用作删除线
+        var rememberAndImportantAttributes: [String: Any] = [NSFontAttributeName: UIFont.systemFont(ofSize: 13)];
+        
+        if item.charge == true {
+            rememberAndImportantAttributes[NSForegroundColorAttributeName] = UIColor.lightGray
+            rememberAndImportantAttributes[NSStrikethroughStyleAttributeName] = NSUnderlineStyle.styleSingle.rawValue
+        } else {
+            rememberAndImportantAttributes[NSForegroundColorAttributeName] = UIColor.darkGray
+        }
+        
+        
         
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -99,20 +122,20 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
         nowTimeLabel.text = nowTimeFormatter.string(from: item.nowDate)
         
         if item.shouldImportant == true {
-            label.textColor = UIColor.red
-            importantLabel.textColor = UIColor.red
-            importantLabel.text = "这个计划很重要!"
-            remindTimeLabel.textColor = UIColor.red
+//            label.textColor = UIColor.red
+//            importantLabel.textColor = UIColor.red
+            importantLabel.attributedText = NSAttributedString(string: "这个计划很重要!", attributes: rememberAndImportantAttributes)
+//            remindTimeLabel.textColor = UIColor.red
         } else {
-            label.textColor = UIColor.black
-            importantLabel.textColor = UIColor.darkGray
-            importantLabel.text = "合理规划并管理你的生活"
-            remindTimeLabel.textColor = UIColor.darkGray
+//            label.textColor = UIColor.black
+//            importantLabel.textColor = UIColor.darkGray
+            importantLabel.attributedText = NSAttributedString(string: "合理规划并管理你的生活", attributes: rememberAndImportantAttributes)
+//            remindTimeLabel.textColor = UIColor.darkGray
         }
         if item.shouldRemind == true {
-            remindTimeLabel.text = "\(formatter.string(from: item.dueDate)) 前完成"
+            remindTimeLabel.attributedText = NSAttributedString(string: "\(formatter.string(from: item.dueDate)) 前完成", attributes: rememberAndImportantAttributes)
         } else {
-            remindTimeLabel.text = "未设定提醒时间"
+            remindTimeLabel.attributedText = NSAttributedString(string: "未设定提醒时间", attributes: rememberAndImportantAttributes)
         }
         
         if item.charge == true { //对勾选中不通知(这种做法比较消耗资源,暂未想到更好的方法)
@@ -169,6 +192,7 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
                 let checkOKAlertAction = UIAlertAction(title: "已经完成", style: .default, handler: { (action) in
                     item.toggleCharge()
                     self.configureCheckmark(for: cell, at: indexPath)
+                    tableView.reloadData()
                 })
                 checkAlert.addAction(checkCancelAlertAction)
                 checkAlert.addAction(checkOKAlertAction)
@@ -179,6 +203,7 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
                 let checkOKAlertAction = UIAlertAction(title: "还未完成", style: .default, handler: { (action) in
                     item.toggleCharge()
                     self.configureCheckmark(for: cell, at: indexPath)
+                    tableView.reloadData()
                 })
                 checkAlert.addAction(checkCancelAlertAction)
                 checkAlert.addAction(checkOKAlertAction)

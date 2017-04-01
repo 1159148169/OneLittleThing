@@ -94,7 +94,33 @@ class TimePlanTableViewController: UITableViewController,DZNEmptyDataSetDelegate
         let nowTimeLabel = cell.viewWithTag(354) as! UILabel
         
         let item = detailLists[indexPath.row]
-        timePlanLabel.text = item.name
+        
+        
+        
+        
+        // 设置计划字体及下划线格式，用作删除线
+        var attributes: [String: Any] = [NSFontAttributeName: UIFont.systemFont(ofSize: 20)];
+        
+        if item.charge == true {
+            attributes[NSForegroundColorAttributeName] = UIColor.lightGray
+            attributes[NSStrikethroughStyleAttributeName] = NSUnderlineStyle.styleSingle.rawValue
+        } else {
+            attributes[NSForegroundColorAttributeName] = UIColor.black
+        }
+        timePlanLabel.attributedText = NSAttributedString(string: item.name, attributes: attributes)
+        
+        // 设置重要、提醒字体及下划线格式，用作删除线
+        var rememberAndImportantAttributes: [String: Any] = [NSFontAttributeName: UIFont.systemFont(ofSize: 13)];
+        
+        if item.charge == true {
+            rememberAndImportantAttributes[NSForegroundColorAttributeName] = UIColor.lightGray
+            rememberAndImportantAttributes[NSStrikethroughStyleAttributeName] = NSUnderlineStyle.styleSingle.rawValue
+        } else {
+            rememberAndImportantAttributes[NSForegroundColorAttributeName] = UIColor.darkGray
+        }
+        
+        
+        
         
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -105,20 +131,20 @@ class TimePlanTableViewController: UITableViewController,DZNEmptyDataSetDelegate
         nowTimeLabel.text = nowTimeFormatter.string(from: item.nowDate)
         
         if item.shouldImportant == true {
-            timePlanLabel.textColor = UIColor.red
-            importantLabel.textColor = UIColor.red
-            importantLabel.text = "这个计划很重要!"
-            remainTimeLabel.textColor = UIColor.red
+//            timePlanLabel.textColor = UIColor.red
+//            importantLabel.textColor = UIColor.red
+            importantLabel.attributedText = NSAttributedString(string: "这个计划很重要!", attributes: rememberAndImportantAttributes)
+//            remainTimeLabel.textColor = UIColor.red
         } else {
-            timePlanLabel.textColor = UIColor.black
-            importantLabel.textColor = UIColor.darkGray
-            importantLabel.text = "合理规划并管理你的生活"
-            remainTimeLabel.textColor = UIColor.darkGray
+//            timePlanLabel.textColor = UIColor.black
+//            importantLabel.textColor = UIColor.darkGray
+            importantLabel.attributedText = NSAttributedString(string: "合理规划并管理你的生活", attributes: rememberAndImportantAttributes)
+//            remainTimeLabel.textColor = UIColor.darkGray
         }
         if item.shouldRemind == true {
-            remainTimeLabel.text = "\(formatter.string(from: item.dueDate)) 前完成"
+            remainTimeLabel.attributedText = NSAttributedString(string: "\(formatter.string(from: item.dueDate)) 前完成", attributes: rememberAndImportantAttributes)
         } else {
-            remainTimeLabel.text = "未设定提醒时间"
+            remainTimeLabel.attributedText = NSAttributedString(string: "未设定提醒时间", attributes: rememberAndImportantAttributes)
         }
         if item.charge {
             finishMarkLabel.text = "我已搞定"
