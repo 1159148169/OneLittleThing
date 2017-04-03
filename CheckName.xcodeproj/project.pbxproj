@@ -11,6 +11,8 @@
 		8B0771FD1DEEA679009C25C5 /* DateTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0771FA1DEEA679009C25C5 /* DateTimePicker.swift */; };
 		8B0771FE1DEEA679009C25C5 /* StepCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0771FB1DEEA679009C25C5 /* StepCollectionViewFlowLayout.swift */; };
 		8B1590BC1E2CF004003B2197 /* TypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1590BB1E2CF004003B2197 /* TypeTableViewCell.swift */; };
+		8B46516B1E9227A700874BFD /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B46516A1E9227A700874BFD /* DetailViewController.swift */; };
+		8B46516D1E922CB400874BFD /* DimmingPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B46516C1E922CB400874BFD /* DimmingPresentationController.swift */; };
 		8B75DDBE1DDB24A200D038E1 /* DZNEmptyDataSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B75DDBD1DDB24A200D038E1 /* DZNEmptyDataSet.framework */; };
 		8B7F8F391DDC8FA000A622D9 /* NewTypeListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F8F381DDC8FA000A622D9 /* NewTypeListTableViewController.swift */; };
 		8B869D4A1E8A51BA00159024 /* SideBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B869D491E8A51BA00159024 /* SideBarController.swift */; };
@@ -39,6 +41,8 @@
 		8B0771FA1DEEA679009C25C5 /* DateTimePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimePicker.swift; sourceTree = "<group>"; };
 		8B0771FB1DEEA679009C25C5 /* StepCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		8B1590BB1E2CF004003B2197 /* TypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeTableViewCell.swift; sourceTree = "<group>"; };
+		8B46516A1E9227A700874BFD /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		8B46516C1E922CB400874BFD /* DimmingPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimmingPresentationController.swift; sourceTree = "<group>"; };
 		8B75DDBD1DDB24A200D038E1 /* DZNEmptyDataSet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DZNEmptyDataSet.framework; path = Carthage/Build/iOS/DZNEmptyDataSet.framework; sourceTree = "<group>"; };
 		8B75DDC11DDB2CAE00D038E1 /* CheckName-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CheckName-Bridging-Header.h"; sourceTree = "<group>"; };
 		8B7F8F381DDC8FA000A622D9 /* NewTypeListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTypeListTableViewController.swift; sourceTree = "<group>"; };
@@ -176,6 +180,8 @@
 				8B8820191E2B832000CE851A /* TimePlanTableViewController.swift */,
 				8B88201B1E2B833400CE851A /* ImportantPlanTableViewController.swift */,
 				8B869D491E8A51BA00159024 /* SideBarController.swift */,
+				8B46516A1E9227A700874BFD /* DetailViewController.swift */,
+				8B46516C1E922CB400874BFD /* DimmingPresentationController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -338,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B869D4A1E8A51BA00159024 /* SideBarController.swift in Sources */,
+				8B46516D1E922CB400874BFD /* DimmingPresentationController.swift in Sources */,
 				8B7F8F391DDC8FA000A622D9 /* NewTypeListTableViewController.swift in Sources */,
 				8B1590BC1E2CF004003B2197 /* TypeTableViewCell.swift in Sources */,
 				8B88201A1E2B832000CE851A /* TimePlanTableViewController.swift in Sources */,
@@ -346,6 +353,7 @@
 				8BC0712F1DCB5A0200A3BFA3 /* AppDelegate.swift in Sources */,
 				8B0771FC1DEEA679009C25C5 /* DateCollectionViewCell.swift in Sources */,
 				8BEB63591DD9EB5C0068AEF1 /* SuperNameTableViewController.swift in Sources */,
+				8B46516B1E9227A700874BFD /* DetailViewController.swift in Sources */,
 				8B0771FE1DEEA679009C25C5 /* StepCollectionViewFlowLayout.swift in Sources */,
 				8B0771FD1DEEA679009C25C5 /* DateTimePicker.swift in Sources */,
 				8B8820181E2B830B00CE851A /* QuickPlanTableViewController.swift in Sources */,

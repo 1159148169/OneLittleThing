@@ -163,6 +163,30 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
             return true
         })]
         cell.rightSwipeSettings.transition = MGSwipeTransition.clipCenter
+        
+        if item.charge == true {
+            cell.leftButtons = [MGSwipeButton(title: "还未完成", backgroundColor: UIColor.darkGray, callback: {
+                (sender: MGSwipeTableCell!) -> Bool in
+                print("Convenience callback for swipe leftButtons!")
+                item.toggleCharge()
+                self.configureCheckmark(for: cell, at: indexPath)
+                tableView.reloadData()
+                
+                return true
+            })]
+            cell.leftSwipeSettings.transition = MGSwipeTransition.clipCenter
+        } else {
+            cell.leftButtons = [MGSwipeButton(title: "已完成", backgroundColor: UIColor.darkGray, callback: {
+                (sender: MGSwipeTableCell!) -> Bool in
+                print("Convenience callback for swipe leftButtons!")
+                item.toggleCharge()
+                self.configureCheckmark(for: cell, at: indexPath)
+                tableView.reloadData()
+                
+                return true
+            })]
+            cell.leftSwipeSettings.transition = MGSwipeTransition.clipCenter
+        }
 
         return cell
     }

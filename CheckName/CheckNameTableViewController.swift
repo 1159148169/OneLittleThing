@@ -176,7 +176,7 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
         //configure right buttons
         cell.rightButtons = [MGSwipeButton(title: "删除", backgroundColor: UIColor.red, callback: {
             (sender: MGSwipeTableCell!) -> Bool in
-            print("Convenience callback for swipe buttons!")
+            print("Convenience callback for swipe rightButtons!")
             let cellIndexPath = self.tableView.indexPath(for: cell)!
             self.typeNames.items.remove(at: cellIndexPath.row)
             let indexPaths = [cellIndexPath]
@@ -187,7 +187,30 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
             return true
         })]
         cell.rightSwipeSettings.transition = MGSwipeTransition.clipCenter
-
+        
+        if item.charge == true {
+            cell.leftButtons = [MGSwipeButton(title: "还未完成", backgroundColor: UIColor.darkGray, callback: {
+                (sender: MGSwipeTableCell!) -> Bool in
+                print("Convenience callback for swipe leftButtons!")
+                item.toggleCharge()
+                self.configureCheckmark(for: cell, at: indexPath)
+                tableView.reloadData()
+                
+                return true
+            })]
+            cell.leftSwipeSettings.transition = MGSwipeTransition.clipCenter
+        } else {
+            cell.leftButtons = [MGSwipeButton(title: "已完成", backgroundColor: UIColor.darkGray, callback: {
+                (sender: MGSwipeTableCell!) -> Bool in
+                print("Convenience callback for swipe leftButtons!")
+                item.toggleCharge()
+                self.configureCheckmark(for: cell, at: indexPath)
+                tableView.reloadData()
+                
+                return true
+            })]
+            cell.leftSwipeSettings.transition = MGSwipeTransition.clipCenter
+        }
         return cell
     }
     
@@ -205,43 +228,46 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
             }
             */
             let item = typeNames.items[indexPath.row]
-            if !item.charge {
-                let checkAlert = UIAlertController(title: "你确定吗", message: "你已经完成了这个计划？", preferredStyle: .alert)
-                let checkCancelAlertAction = UIAlertAction(title: "我手滑了", style: .cancel, handler: nil)
-                let checkOKAlertAction = UIAlertAction(title: "已经完成", style: .default, handler: { (action) in
-                    item.toggleCharge()
-                    self.configureCheckmark(for: cell, at: indexPath)
-                    
-                    
-                    
-                    tableView.reloadData()
-                    
-                    
-                    
-                })
-                checkAlert.addAction(checkCancelAlertAction)
-                checkAlert.addAction(checkOKAlertAction)
-                self.present(checkAlert, animated: true, completion: nil)
-            } else {
-                let checkAlert = UIAlertController(title: "你确定吗", message: "这是一个你已经完成的计划", preferredStyle: .alert)
-                let checkCancelAlertAction = UIAlertAction(title: "我手滑了", style: .cancel, handler: nil)
-                let checkOKAlertAction = UIAlertAction(title: "还未完成", style: .default, handler: { (action) in
-                    item.toggleCharge()
-                    self.configureCheckmark(for: cell, at: indexPath)
-                    
-                    
-                    
-                    tableView.reloadData()
-                    
-                    
-                    
-                })
-                checkAlert.addAction(checkCancelAlertAction)
-                checkAlert.addAction(checkOKAlertAction)
-                self.present(checkAlert, animated: true, completion: nil)
-            }
+            
+//            if !item.charge {
+//                let checkAlert = UIAlertController(title: "你确定吗", message: "你已经完成了这个计划？", preferredStyle: .alert)
+//                let checkCancelAlertAction = UIAlertAction(title: "我手滑了", style: .cancel, handler: nil)
+//                let checkOKAlertAction = UIAlertAction(title: "已经完成", style: .default, handler: { (action) in
+//                    item.toggleCharge()
+//                    self.configureCheckmark(for: cell, at: indexPath)
+//                    
+//                    
+//                    
+//                    tableView.reloadData()
+//                    
+//                    
+//                    
+//                })
+//                checkAlert.addAction(checkCancelAlertAction)
+//                checkAlert.addAction(checkOKAlertAction)
+//                self.present(checkAlert, animated: true, completion: nil)
+//            } else {
+//                let checkAlert = UIAlertController(title: "你确定吗", message: "这是一个你已经完成的计划", preferredStyle: .alert)
+//                let checkCancelAlertAction = UIAlertAction(title: "我手滑了", style: .cancel, handler: nil)
+//                let checkOKAlertAction = UIAlertAction(title: "还未完成", style: .default, handler: { (action) in
+//                    item.toggleCharge()
+//                    self.configureCheckmark(for: cell, at: indexPath)
+//                    
+//                    
+//                    
+//                    tableView.reloadData()
+//                    
+//                    
+//                    
+//                })
+//                checkAlert.addAction(checkCancelAlertAction)
+//                checkAlert.addAction(checkOKAlertAction)
+//                self.present(checkAlert, animated: true, completion: nil)
+//            }
         
             tableView.deselectRow(at: indexPath, animated: true)
+            
+            performSegue(withIdentifier: "ShowDetail", sender: indexPath)
         }
         //saveChecklistItems()
     }
@@ -261,6 +287,14 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
                 controller.nameToEdit = typeNames.items[indexPath.row]
                 print("6666")
             }
+        }
+        
+        else if segue.identifier == "ShowDetail" {
+            let detailController = segue.destination as! DetailViewController
+            let indexPath = sender as! IndexPath
+            let item = typeNames.items[indexPath.row]
+            detailController.items = item
+            detailController.typeNames = typeNames
         }
     }
     
