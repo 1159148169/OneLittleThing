@@ -197,46 +197,20 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) { //cell会重用,不要用cell存储数据,也就是说不要用cell做DataModel
-            /*
-             下面的代码就是用cell保存点击后Checkmark的状态,是错误的
-             */
-            /*
-             if cell.accessoryType == .none {
-             cell.accessoryType = .checkmark
-             }
-             else {
-             cell.accessoryType = .none
-             }
-             */
-            let item = allType[count].items[indexPath.row]
-            if !item.charge {
-                let checkAlert = UIAlertController(title: "你确定吗", message: "你已经完成了这个计划？", preferredStyle: .alert)
-                let checkCancelAlertAction = UIAlertAction(title: "我手滑了", style: .cancel, handler: nil)
-                let checkOKAlertAction = UIAlertAction(title: "已经完成", style: .default, handler: { (action) in
-                    item.toggleCharge()
-                    self.configureCheckmark(for: cell, at: indexPath)
-                    tableView.reloadData()
-                })
-                checkAlert.addAction(checkCancelAlertAction)
-                checkAlert.addAction(checkOKAlertAction)
-                self.present(checkAlert, animated: true, completion: nil)
-            } else {
-                let checkAlert = UIAlertController(title: "你确定吗", message: "这是一个你已经完成的计划", preferredStyle: .alert)
-                let checkCancelAlertAction = UIAlertAction(title: "我手滑了", style: .cancel, handler: nil)
-                let checkOKAlertAction = UIAlertAction(title: "还未完成", style: .default, handler: { (action) in
-                    item.toggleCharge()
-                    self.configureCheckmark(for: cell, at: indexPath)
-                    tableView.reloadData()
-                })
-                checkAlert.addAction(checkCancelAlertAction)
-                checkAlert.addAction(checkOKAlertAction)
-                self.present(checkAlert, animated: true, completion: nil)
-            }
-            
-            tableView.deselectRow(at: indexPath, animated: true)
-        }
-        saveChecklist()
+        //cell会重用,不要用cell存储数据,也就是说不要用cell做DataModel
+        /*
+         下面的代码就是用cell保存点击后Checkmark的状态,是错误的
+         */
+        /*
+         if cell.accessoryType == .none {
+            cell.accessoryType = .checkmark
+         }
+         else {
+            cell.accessoryType = .none
+         }
+         */
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "ShowDetail", sender: indexPath)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -256,6 +230,15 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
                 print("6666")
             }
         }
+        
+        else if segue.identifier == "ShowDetail" {
+            let detailController = segue.destination as! DetailViewController
+            let indexPath = sender as! IndexPath
+            let item = allType[count].items[indexPath.row]
+            detailController.items = item
+            detailController.typeNames = allType[count].name
+        }
+        
     }
     
     //MARK:-返回button所在的UITableViewCell

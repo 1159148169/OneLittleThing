@@ -19,6 +19,8 @@ class NameItem:NSObject,NSCoding {
     var shouldRemind = false
     var itemID: Int
     
+    var superTypeName:String = ""
+    
     override init() { //删掉会导致程序无法运行
         itemID = NameItem.nextCheckListItmeID()
         super.init()
@@ -37,6 +39,7 @@ class NameItem:NSObject,NSCoding {
         aCoder.encode(shouldImportant, forKey: "Important")
         aCoder.encode(shouldRemind, forKey: "Remind")
         aCoder.encode(itemID, forKey: "ID")
+        aCoder.encode(superTypeName, forKey: "SuperTypeName")
     }
     required init?(coder aDecoder: NSCoder) {
         name = aDecoder.decodeObject(forKey: "Text") as! String
@@ -46,6 +49,7 @@ class NameItem:NSObject,NSCoding {
         shouldImportant = aDecoder.decodeBool(forKey: "Important")
         shouldRemind = aDecoder.decodeBool(forKey: "Remind")
         itemID = aDecoder.decodeInteger(forKey: "ID")
+        superTypeName = aDecoder.decodeObject(forKey: "SuperTypeName") as! String
         super.init()
     }
     

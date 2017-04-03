@@ -163,11 +163,18 @@ class TimePlanTableViewController: UITableViewController,DZNEmptyDataSetDelegate
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let alert = UIAlertController(title: "哦...", message: "在这里你不能通过点击来改变计划的状态", preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: "好", style: .default, handler: nil)
-        alert.addAction(alertAction)
-        present(alert, animated: true, completion: nil)
         tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "ShowDetail", sender: indexPath)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowDetail" {
+            let detailController = segue.destination as! DetailViewController
+            let indexPath = sender as! IndexPath
+            let item = detailLists[indexPath.row]
+            detailController.items = item
+            detailController.typeNames = item.superTypeName
+        }
     }
     
     
@@ -240,7 +247,7 @@ class TimePlanTableViewController: UITableViewController,DZNEmptyDataSetDelegate
     func imageAnimation(forEmptyDataSet scrollView: UIScrollView!) -> CAAnimation! {
         let animation = CABasicAnimation(keyPath: "transform")
         animation.fromValue = NSValue(caTransform3D: CATransform3DIdentity)
-        animation.toValue = NSValue(caTransform3D: CATransform3DMakeRotation(CGFloat(M_PI_2), 0.0, 0.0, 1.0))
+        animation.toValue = NSValue(caTransform3D: CATransform3DMakeRotation(CGFloat(Double.pi/2), 0.0, 0.0, 1.0))
         animation.duration = 0.25
         animation.isCumulative = true
         animation.repeatCount = MAXFLOAT

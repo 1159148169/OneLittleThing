@@ -11,7 +11,7 @@ import UIKit
 class DetailViewController: UIViewController {
     
     var items: NameItem!
-    var typeNames: TypeListItem!
+    var typeNames: String!
     
     @IBOutlet weak var popView: UIView!
     @IBOutlet weak var planLabel: UILabel!
@@ -39,10 +39,16 @@ class DetailViewController: UIViewController {
         
         view.tintColor = UIColor.black
         popView.layer.cornerRadius = 10 // 圆角
+        view.backgroundColor = UIColor.clear
         
         if items != nil {
             updateUI()
         }
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(close))
+        gestureRecognizer.cancelsTouchesInView = false
+        gestureRecognizer.delegate = self
+        view.addGestureRecognizer(gestureRecognizer)
         
     }
 
@@ -61,7 +67,7 @@ class DetailViewController: UIViewController {
         nowTimeFormatter.dateFormat = "MM月dd日"
         
         planLabel.text = items.name
-        kindLabel.text = typeNames.name
+        kindLabel.text = typeNames
         if items.shouldImportant == true {
             importantLabel.text = "这个计划很重要!"
         } else {
@@ -84,5 +90,18 @@ class DetailViewController: UIViewController {
 extension DetailViewController: UIViewControllerTransitioningDelegate {
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         return DimmingPresentationController(presentedViewController: presented, presenting: presenting) // 不使用标准转场，使用自定义的转场
+    }
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return BounceAnimationController()
+    }
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return SlideOutAnimationController()
+    }
+}
+
+extension DetailViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        return (touch.view === self.view)
     }
 }

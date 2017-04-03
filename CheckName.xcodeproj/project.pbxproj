@@ -13,6 +13,9 @@
 		8B1590BC1E2CF004003B2197 /* TypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1590BB1E2CF004003B2197 /* TypeTableViewCell.swift */; };
 		8B46516B1E9227A700874BFD /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B46516A1E9227A700874BFD /* DetailViewController.swift */; };
 		8B46516D1E922CB400874BFD /* DimmingPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B46516C1E922CB400874BFD /* DimmingPresentationController.swift */; };
+		8B46516F1E9268ED00874BFD /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B46516E1E9268ED00874BFD /* GradientView.swift */; };
+		8B4651711E926D8F00874BFD /* BounceAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4651701E926D8F00874BFD /* BounceAnimationController.swift */; };
+		8B4651731E926EA100874BFD /* SlideOutAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4651721E926EA100874BFD /* SlideOutAnimationController.swift */; };
 		8B75DDBE1DDB24A200D038E1 /* DZNEmptyDataSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B75DDBD1DDB24A200D038E1 /* DZNEmptyDataSet.framework */; };
 		8B7F8F391DDC8FA000A622D9 /* NewTypeListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F8F381DDC8FA000A622D9 /* NewTypeListTableViewController.swift */; };
 		8B869D4A1E8A51BA00159024 /* SideBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B869D491E8A51BA00159024 /* SideBarController.swift */; };
@@ -43,6 +46,9 @@
 		8B1590BB1E2CF004003B2197 /* TypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeTableViewCell.swift; sourceTree = "<group>"; };
 		8B46516A1E9227A700874BFD /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		8B46516C1E922CB400874BFD /* DimmingPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimmingPresentationController.swift; sourceTree = "<group>"; };
+		8B46516E1E9268ED00874BFD /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		8B4651701E926D8F00874BFD /* BounceAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BounceAnimationController.swift; sourceTree = "<group>"; };
+		8B4651721E926EA100874BFD /* SlideOutAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideOutAnimationController.swift; sourceTree = "<group>"; };
 		8B75DDBD1DDB24A200D038E1 /* DZNEmptyDataSet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DZNEmptyDataSet.framework; path = Carthage/Build/iOS/DZNEmptyDataSet.framework; sourceTree = "<group>"; };
 		8B75DDC11DDB2CAE00D038E1 /* CheckName-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CheckName-Bridging-Header.h"; sourceTree = "<group>"; };
 		8B7F8F381DDC8FA000A622D9 /* NewTypeListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTypeListTableViewController.swift; sourceTree = "<group>"; };
@@ -165,6 +171,7 @@
 				8BC071321DCB5A0200A3BFA3 /* Main.storyboard */,
 				8BC071371DCB5A0200A3BFA3 /* LaunchScreen.storyboard */,
 				8B869D4B1E8B983200159024 /* HudView.swift */,
+				8B46516E1E9268ED00874BFD /* GradientView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -182,6 +189,8 @@
 				8B869D491E8A51BA00159024 /* SideBarController.swift */,
 				8B46516A1E9227A700874BFD /* DetailViewController.swift */,
 				8B46516C1E922CB400874BFD /* DimmingPresentationController.swift */,
+				8B4651701E926D8F00874BFD /* BounceAnimationController.swift */,
+				8B4651721E926EA100874BFD /* SlideOutAnimationController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -345,6 +354,7 @@
 			files = (
 				8B869D4A1E8A51BA00159024 /* SideBarController.swift in Sources */,
 				8B46516D1E922CB400874BFD /* DimmingPresentationController.swift in Sources */,
+				8B46516F1E9268ED00874BFD /* GradientView.swift in Sources */,
 				8B7F8F391DDC8FA000A622D9 /* NewTypeListTableViewController.swift in Sources */,
 				8B1590BC1E2CF004003B2197 /* TypeTableViewCell.swift in Sources */,
 				8B88201A1E2B832000CE851A /* TimePlanTableViewController.swift in Sources */,
@@ -355,11 +365,13 @@
 				8BEB63591DD9EB5C0068AEF1 /* SuperNameTableViewController.swift in Sources */,
 				8B46516B1E9227A700874BFD /* DetailViewController.swift in Sources */,
 				8B0771FE1DEEA679009C25C5 /* StepCollectionViewFlowLayout.swift in Sources */,
+				8B4651711E926D8F00874BFD /* BounceAnimationController.swift in Sources */,
 				8B0771FD1DEEA679009C25C5 /* DateTimePicker.swift in Sources */,
 				8B8820181E2B830B00CE851A /* QuickPlanTableViewController.swift in Sources */,
 				8B869D4C1E8B983200159024 /* HudView.swift in Sources */,
 				8B8820161E2B6E8300CE851A /* SWRevealViewController.m in Sources */,
 				8BC071411DCB5A3600A3BFA3 /* CheckNameTableViewController.swift in Sources */,
+				8B4651731E926EA100874BFD /* SlideOutAnimationController.swift in Sources */,
 				8B8C1B0C1DD0B534002AA63D /* NameListItem.swift in Sources */,
 				8B88201C1E2B833400CE851A /* ImportantPlanTableViewController.swift in Sources */,
 			);
