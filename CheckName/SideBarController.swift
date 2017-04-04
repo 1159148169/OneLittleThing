@@ -75,7 +75,7 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
                 geocoder.reverseGeocodeLocation(lastLocation, completionHandler: {
                     placemarks, error in //闭包里的代码不会马上执行，闭包保留以供以后由CLGeocoder对象使用，并且只有在CLGeocoder找到地址或遇到错误后才执行
                     
-                    print("Found Placemarks \(placemarks) error \(error)")
+                    print("Found Placemarks \(String(describing: placemarks)) error \(String(describing: error))")
                     
                     self.lastGeocodingError = error
                     if error == nil,let p = placemarks,!p.isEmpty { // 这样的写法表示placemarks是可选值，需要解包再使用，!p.isEmpty表示如果placemarks数组不为空，就应该只输入此if语句，这句可以这么理解：如果没有错误，并且解包的地标数组不为空
@@ -176,7 +176,7 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
             self.dataTask = session.dataTask(with: url, completionHandler: { (data, response, error) in
                 
                 if error != nil { // 网络发生任何错误
-                    print("天气API获取错误: \(error)")
+                    print("天气API获取错误: \(String(describing: error))")
                     DispatchQueue.main.async {
                         self.weatherLabel.text = "你的每一次努力都不应该被辜负"
                     }
