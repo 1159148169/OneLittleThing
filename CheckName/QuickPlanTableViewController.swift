@@ -87,6 +87,7 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
         let nowTimeLabel = cell.viewWithTag(254) as! UILabel
         
         let item = allType[count].items[indexPath.row]
+        item.superTypeName = allType[count].name
         
         
         
