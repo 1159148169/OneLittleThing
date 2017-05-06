@@ -10,11 +10,15 @@ import UIKit
 import UserNotifications
 
 protocol AddItemViewControllerDelegate: class {
+    @available(iOS 10.0, *)
     func addItemViewControllerDidCancel(_ controller: AddNameListTableViewController)
+    @available(iOS 10.0, *)
     func addItemViewControllerDidDone(_ controller: AddNameListTableViewController, didFinishAdding item: NameItem)
+    @available(iOS 10.0, *)
     func editItemViewControllerDidDone(_ controller: AddNameListTableViewController, didFinishEditing item: NameItem)
 }
 
+@available(iOS 10.0, *)
 class AddNameListTableViewController: UITableViewController,UITextFieldDelegate {
 
     weak var delegate:AddItemViewControllerDelegate?
@@ -32,6 +36,7 @@ class AddNameListTableViewController: UITableViewController,UITextFieldDelegate 
     @IBOutlet weak var shouldRemindMeSwitch:UISwitch!
     @IBOutlet weak var dueDateLabel:UILabel!
     
+    @available(iOS 10.0, *)
     @IBAction func shouldRemindToggled(_ switchControl: UISwitch) {
         textField.resignFirstResponder()
         

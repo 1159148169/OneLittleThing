@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(iOS 10.0, *)
 class CheckNameTableViewController: UITableViewController,AddItemViewControllerDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate {
     var typeNames:TypeListItem!
     

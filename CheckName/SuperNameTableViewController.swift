@@ -149,9 +149,12 @@ class SuperNameTableViewController: UITableViewController,AddNewListTypeDelegate
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowDetail" {
-            let controller = segue.destination as! CheckNameTableViewController
-            controller.typeNames = sender as! TypeListItem
-        }
+            if #available(iOS 10.0, *) {
+                let controller = segue.destination as! CheckNameTableViewController
+                 controller.typeNames = sender as! TypeListItem
+            } else {
+                // Fallback on earlier versions
+            }  }
         else if segue.identifier == "AddType" {
             let navigationController = segue.destination as! UINavigationController
             let controller = navigationController.topViewController as! NewTypeListTableViewController

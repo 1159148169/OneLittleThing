@@ -62,6 +62,7 @@ class NameItem:NSObject,NSCoding {
     }
     
     //添加通知
+    @available(iOS 10.0, *)
     func scheduleNotification() {
         removeNotification()
         if shouldRemind && dueDate > Date() {
@@ -83,11 +84,13 @@ class NameItem:NSObject,NSCoding {
         }
     }
     
+    @available(iOS 10.0, *)
     func removeNotification() {
         let center = UNUserNotificationCenter.current()
         center.removePendingNotificationRequests( withIdentifiers: ["\(itemID)"])
     }
     
+    @available(iOS 10.0, *)
     deinit { //当主页面的cell或子页面的cell被删除时调用析构方法
         removeNotification()
     }

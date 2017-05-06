@@ -39,7 +39,14 @@ class DetailViewController: UIViewController {
         
         view.tintColor = UIColor.black
         popView.layer.cornerRadius = 10 // 圆角
-        view.backgroundColor = UIColor.clear
+        
+        
+        
+        
+        view.backgroundColor = UIColor.clear // 此行很重要，隐藏了背景View出现和消失的动画
+        
+        
+        
         
         if items != nil {
             updateUI()

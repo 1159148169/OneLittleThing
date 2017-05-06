@@ -18,6 +18,7 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
     var searchResult: [String: String]!
     var locationString: String = "error"
     
+    let successGetLocation = Notification.Name(rawValue: "getLocationSuccess")
     
     var location: CLLocation? //用来保存获取到的地址位置信息(地理位置有可能获取不到,也有可能正在获取,此时就是nil,所以为可选值)
     var updatingLocation = false
@@ -92,6 +93,7 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
                     
                     if self.placemark!.administrativeArea != nil {
                         self.locationString = self.convertAdtressString(with: self.placemark!.administrativeArea!)
+                        NotificationCenter.default.post(name: self.successGetLocation, object: nil)
                     } else {
                         self.locationString = "error"
                     }
@@ -153,18 +155,16 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         getLocation()
+        self.dataTask?.cancel()
         
-        let delayInSeconds = 2.0
-        DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds, execute: { // 暂时只能使用延迟执行使定位先于网络请求执行
+        NotificationCenter.default.addObserver(forName: successGetLocation, object: nil, queue: OperationQueue.main) { (Notification) in
             
-            self.dataTask?.cancel()
             let url: URL
             if self.locationString == "error" {
                 url = URL(string: "https://error")!
@@ -195,8 +195,7 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
             })
             self.dataTask?.resume()
             
-        })
-        
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

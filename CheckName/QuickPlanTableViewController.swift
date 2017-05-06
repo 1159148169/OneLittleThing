@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(iOS 10.0, *)
 class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,AddItemViewControllerDelegate {
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
