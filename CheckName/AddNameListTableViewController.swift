@@ -8,19 +8,16 @@
 
 import UIKit
 import UserNotifications
+import EventKit
 
 protocol AddItemViewControllerDelegate: class {
-    @available(iOS 10.0, *)
     func addItemViewControllerDidCancel(_ controller: AddNameListTableViewController)
-    @available(iOS 10.0, *)
     func addItemViewControllerDidDone(_ controller: AddNameListTableViewController, didFinishAdding item: NameItem)
-    @available(iOS 10.0, *)
     func editItemViewControllerDidDone(_ controller: AddNameListTableViewController, didFinishEditing item: NameItem)
 }
 
-@available(iOS 10.0, *)
 class AddNameListTableViewController: UITableViewController,UITextFieldDelegate {
-
+    
     weak var delegate:AddItemViewControllerDelegate?
     
     var nameToEdit:NameItem?
@@ -34,19 +31,57 @@ class AddNameListTableViewController: UITableViewController,UITextFieldDelegate 
     
     @IBOutlet weak var shouldImportantSwitch:UISwitch!
     @IBOutlet weak var shouldRemindMeSwitch:UISwitch!
+    @IBOutlet weak var ifAddToAppleCalendar:UISwitch!
     @IBOutlet weak var dueDateLabel:UILabel!
     
-    @available(iOS 10.0, *)
+    @IBAction func shouldImportant(_ sender: UISwitch) {
+        textField.resignFirstResponder()
+        
+        if sender.isOn {
+            let importantBanner = Banner(title: "已设置为重要",backgroundColor: UIColor(red:0.0/255.0, green:191.0/255.0, blue:255.5/255.0, alpha:1.000))
+            importantBanner.dismissesOnTap = true
+            importantBanner.show(duration: 1.0)
+        } else {
+            let importantBanner = Banner(title: "已取消设置为重要",backgroundColor: UIColor(red:0.0/255.0, green:191.0/255.0, blue:255.5/255.0, alpha:1.000))
+            importantBanner.dismissesOnTap = true
+            importantBanner.show(duration: 1.0)
+        }
+    }
     @IBAction func shouldRemindToggled(_ switchControl: UISwitch) {
         textField.resignFirstResponder()
         
         if switchControl.isOn {
             let center = UNUserNotificationCenter.current()
             center.requestAuthorization(options: [.alert, .sound]) { //iOS10向用户申请通知权限
-            
-            granted, error in /* do nothing */
+                
+                granted, error in /* do nothing */
                 
             }
+            let remindBanner = Banner(title: "已设置提醒",backgroundColor: UIColor(red:255.0/255.0, green:165.0/255.0, blue:0.0/255.0, alpha:1.000))
+            remindBanner.dismissesOnTap = true
+            remindBanner.show(duration: 1.0)
+        } else {
+            let remindBanner = Banner(title: "已关闭提醒",backgroundColor: UIColor(red:255.0/255.0, green:165.0/255.0, blue:0.0/255.0, alpha:1.000))
+            remindBanner.dismissesOnTap = true
+            remindBanner.show(duration: 1.0)
+        }
+    }
+    
+    @IBAction func ifAddToAppleCalendarOrNot(_ switchControl: UISwitch) {
+        textField.resignFirstResponder()
+        
+        if switchControl.isOn {
+            let eventStore = EKEventStore()
+            eventStore.requestAccess(to: .event, completion: { (granted, error) in
+                
+            })
+            let addToAppleCalendarBanner = Banner(title: "已添加到系统日历",backgroundColor: UIColor.red)
+            addToAppleCalendarBanner.dismissesOnTap = true
+            addToAppleCalendarBanner.show(duration: 1.0)
+        } else {
+            let addToAppleCalendarBanner = Banner(title: "已取消添加到系统日历",backgroundColor: UIColor.red)
+            addToAppleCalendarBanner.dismissesOnTap = true
+            addToAppleCalendarBanner.show(duration: 1.0)
         }
     }
     
@@ -65,13 +100,35 @@ class AddNameListTableViewController: UITableViewController,UITextFieldDelegate 
             nameToEdit.shouldRemind = shouldRemindMeSwitch.isOn
             nameToEdit.dueDate = dueDate
             nameToEdit.nowDate = Date()
+            nameToEdit.shouldAddToAppleCalendar = ifAddToAppleCalendar.isOn
             
             nameToEdit.scheduleNotification()
             
             hudView.text = "已更新"
             
+            if ifAddToAppleCalendar.isOn {
+                let eventStore = EKEventStore()
+                let event:EKEvent = EKEvent(eventStore: eventStore)
+                event.title = nameToEdit.name
+                if nameToEdit.shouldRemind == true {
+                    event.startDate = nameToEdit.dueDate
+                    event.endDate = nameToEdit.dueDate
+                } else {
+                    event.startDate = Date()
+                    event.endDate = Date()
+                }
+                event.notes = "来自--小事一桩"
+                event.calendar = eventStore.defaultCalendarForNewEvents
+                
+                do {
+                    try eventStore.save(event, span: .thisEvent)
+                    print("Saved Event")
+                } catch {
+                }
+            }
+            
             let delayInSeconds = 0.6
-            DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds, execute: { 
+            DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds, execute: {
                 self.delegate?.editItemViewControllerDidDone(self, didFinishEditing: nameToEdit)
             })
             
@@ -84,10 +141,32 @@ class AddNameListTableViewController: UITableViewController,UITextFieldDelegate 
             newName.shouldRemind = shouldRemindMeSwitch.isOn
             newName.dueDate = dueDate
             newName.nowDate = Date()
+            newName.shouldAddToAppleCalendar = ifAddToAppleCalendar.isOn
             
             newName.scheduleNotification()
             
             hudView.text = "已添加"
+            
+            if ifAddToAppleCalendar.isOn {
+                let eventStore = EKEventStore()
+                let event:EKEvent = EKEvent(eventStore: eventStore)
+                event.title = newName.name
+                if newName.shouldRemind == true {
+                    event.startDate = newName.dueDate
+                    event.endDate = newName.dueDate
+                } else {
+                    event.startDate = Date()
+                    event.endDate = Date()
+                }
+                event.notes = "来自--小事一桩"
+                event.calendar = eventStore.defaultCalendarForNewEvents
+                
+                do {
+                    try eventStore.save(event, span: .thisEvent)
+                    print("Saved Event")
+                } catch {
+                }
+            }
             
             let delayInSeconds = 0.6
             DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds, execute: {
@@ -111,23 +190,24 @@ class AddNameListTableViewController: UITableViewController,UITextFieldDelegate 
             shouldImportantSwitch.isOn = nameToEdit.shouldImportant
             shouldRemindMeSwitch.isOn = nameToEdit.shouldRemind
             dueDate = nameToEdit.dueDate
+            ifAddToAppleCalendar.isOn = nameToEdit.shouldAddToAppleCalendar
         }
         updateDueDateLabel()
     }
     
     /*隐藏键盘(此方法对tableView无效,仅对View有效)
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-        self.tableView.endEditing(true)
-    }*/
+     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+     self.view.endEditing(true)
+     self.tableView.endEditing(true)
+     }*/
     
     /*override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? { //此行代码作用未知,需要再研究
-        return nil
-    }*/
+     return nil
+     }*/
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 1 && indexPath.row == 2 {
+        if indexPath.section == 1 && indexPath.row == 3 {
             showDatePicker()
         }
         

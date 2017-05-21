@@ -17,6 +17,7 @@ class NameItem:NSObject,NSCoding {
     var nowDate = Date()
     var shouldImportant = false
     var shouldRemind = false
+    var shouldAddToAppleCalendar = false
     var itemID: Int
     
     var superTypeName:String = ""
@@ -40,6 +41,7 @@ class NameItem:NSObject,NSCoding {
         aCoder.encode(shouldRemind, forKey: "Remind")
         aCoder.encode(itemID, forKey: "ID")
         aCoder.encode(superTypeName, forKey: "SuperTypeName")
+        aCoder.encode(shouldAddToAppleCalendar, forKey: "addToAppleCalendar")
     }
     required init?(coder aDecoder: NSCoder) {
         name = aDecoder.decodeObject(forKey: "Text") as! String
@@ -48,6 +50,7 @@ class NameItem:NSObject,NSCoding {
         nowDate = aDecoder.decodeObject(forKey: "Now") as! Date
         shouldImportant = aDecoder.decodeBool(forKey: "Important")
         shouldRemind = aDecoder.decodeBool(forKey: "Remind")
+        shouldAddToAppleCalendar = aDecoder.decodeBool(forKey: "addToAppleCalendar")
         itemID = aDecoder.decodeInteger(forKey: "ID")
         superTypeName = aDecoder.decodeObject(forKey: "SuperTypeName") as! String
         super.init()
@@ -62,7 +65,6 @@ class NameItem:NSObject,NSCoding {
     }
     
     //添加通知
-    @available(iOS 10.0, *)
     func scheduleNotification() {
         removeNotification()
         if shouldRemind && dueDate > Date() {
@@ -84,15 +86,14 @@ class NameItem:NSObject,NSCoding {
         }
     }
     
-    @available(iOS 10.0, *)
     func removeNotification() {
         let center = UNUserNotificationCenter.current()
         center.removePendingNotificationRequests( withIdentifiers: ["\(itemID)"])
     }
     
-    @available(iOS 10.0, *)
-    deinit { //当主页面的cell或子页面的cell被删除时调用析构方法
+    deinit {
         removeNotification()
+        print("通知被移除!")
     }
     
 }

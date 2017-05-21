@@ -26,55 +26,55 @@ class NewTypeListTableViewController: UITableViewController {
         lists = [TypeListItem]()
         let item0 = TypeListItem(name: "学习") //必须自己定义一个构造器
         item0.typeDetail = "I Love Study!"
-        item0.typeImage = UIImage(named: "study.png")!
+        item0.typeImage = UIImage(named: "study.jpg")!
         item0.typeImageView = UIImageView(image: item0.typeImage)
         lists.append(item0)
         
         let item1 = TypeListItem(name: "运动")
         item1.typeDetail = "I Love Sports!"
-        item1.typeImage = UIImage(named: "sports.png")!
+        item1.typeImage = UIImage(named: "sports.jpg")!
         item1.typeImageView = UIImageView(image: item1.typeImage)
         lists.append(item1)
         
         let item2 = TypeListItem(name: "工作")
         item2.typeDetail = "I Love Works!"
-        item2.typeImage = UIImage(named: "work.png")!
+        item2.typeImage = UIImage(named: "work.jpg")!
         item2.typeImageView = UIImageView(image: item2.typeImage)
         lists.append(item2)
         
         let item3 = TypeListItem(name: "生活")
         item3.typeDetail = "I Love Life!"
-        item3.typeImage = UIImage(named: "life.png")!
+        item3.typeImage = UIImage(named: "life.jpg")!
         item3.typeImageView = UIImageView(image: item3.typeImage)
         lists.append(item3)
         
         let item4 = TypeListItem(name: "购物")
         item4.typeDetail = "I Love Buy!"
-        item4.typeImage = UIImage(named: "shopping.png")!
+        item4.typeImage = UIImage(named: "shopping.jpg")!
         item4.typeImageView = UIImageView(image: item4.typeImage)
         lists.append(item4)
         
         let item5 = TypeListItem(name: "商业")
         item5.typeDetail = "I Love Business!"
-        item5.typeImage = UIImage(named: "business.png")!
+        item5.typeImage = UIImage(named: "business.jpg")!
         item5.typeImageView = UIImageView(image: item5.typeImage)
         lists.append(item5)
         
         let item6 = TypeListItem(name: "学校")
         item6.typeDetail = "I Love School!"
-        item6.typeImage = UIImage(named: "school.png")!
+        item6.typeImage = UIImage(named: "school.jpg")!
         item6.typeImageView = UIImageView(image: item6.typeImage)
         lists.append(item6)
         
         let item7 = TypeListItem(name: "公司")
         item7.typeDetail = "I Love Company!"
-        item7.typeImage = UIImage(named: "company.png")!
+        item7.typeImage = UIImage(named: "company.jpg")!
         item7.typeImageView = UIImageView(image: item7.typeImage)
         lists.append(item7)
         
         let item8 = TypeListItem(name: "其他")
         item8.typeDetail = "Interesting!"
-        item8.typeImage = UIImage(named: "others.png")!
+        item8.typeImage = UIImage(named: "others.jpg")!
         item8.typeImageView = UIImageView(image: item8.typeImage)
         lists.append(item8)
         
@@ -117,7 +117,7 @@ class NewTypeListTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ListTypeCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ListTypeCell", for: indexPath) as! ParallaxTableViewCell
 
         let typeLabel = cell.viewWithTag(100) as! UILabel
         let typeDetailLabel = cell.viewWithTag(101) as! UILabel
@@ -128,7 +128,8 @@ class NewTypeListTableViewController: UITableViewController {
         typeDetailLabel.text = typeName.typeDetail
         
         //添加cell背景图
-        cell.backgroundView = typeName.typeImageView
+//        cell.backgroundView = typeName.typeImageView
+        cell.imgBack.image = typeName.typeImage
 
         return cell
     }
@@ -147,6 +148,27 @@ class NewTypeListTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (scrollView == self.tableView) {
+            for indexPath in self.tableView.indexPathsForVisibleRows! {
+                self.setCellImageOffset(self.tableView.cellForRow(at: indexPath) as! ParallaxTableViewCell, indexPath: indexPath as NSIndexPath)
+            }
+        }
+    }
+    
+    func setCellImageOffset(_ cell: ParallaxTableViewCell, indexPath: NSIndexPath) {
+        let cellFrame = self.tableView.rectForRow(at: indexPath as IndexPath)
+        let cellFrameInTable = self.tableView.convert(cellFrame, to:self.tableView.superview)
+        let cellOffset = cellFrameInTable.origin.y + cellFrameInTable.size.height
+        let tableHeight = self.tableView.bounds.size.height + cellFrameInTable.size.height
+        let cellOffsetFactor = cellOffset / tableHeight
+        cell.setBackgroundOffset(cellOffsetFactor)
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let imageCell = cell as! ParallaxTableViewCell
+        self.setCellImageOffset(imageCell, indexPath: indexPath as NSIndexPath)
+    }
 
     /*
     // Override to support conditional editing of the table view.

@@ -8,7 +8,6 @@
 
 import UIKit
 
-@available(iOS 10.0, *)
 class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,AddItemViewControllerDelegate {
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
@@ -34,7 +33,7 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
             allType.append(quick)
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,31 +47,31 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
         self.tableView.emptyDataSetDelegate = self
         self.tableView.tableFooterView = UIView()
         self.tableView.rowHeight = 100 //改变row高度
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return allType[count].items.count
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuickPlanCell", for: indexPath) as! TypeTableViewCell
@@ -124,15 +123,15 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
         nowTimeLabel.text = nowTimeFormatter.string(from: item.nowDate)
         
         if item.shouldImportant == true {
-//            label.textColor = UIColor.red
-//            importantLabel.textColor = UIColor.red
+            //            label.textColor = UIColor.red
+            //            importantLabel.textColor = UIColor.red
             importantLabel.attributedText = NSAttributedString(string: "这个计划很重要!", attributes: rememberAndImportantAttributes)
-//            remindTimeLabel.textColor = UIColor.red
+            //            remindTimeLabel.textColor = UIColor.red
         } else {
-//            label.textColor = UIColor.black
-//            importantLabel.textColor = UIColor.darkGray
+            //            label.textColor = UIColor.black
+            //            importantLabel.textColor = UIColor.darkGray
             importantLabel.attributedText = NSAttributedString(string: "合理规划并管理你的生活", attributes: rememberAndImportantAttributes)
-//            remindTimeLabel.textColor = UIColor.darkGray
+            //            remindTimeLabel.textColor = UIColor.darkGray
         }
         if item.shouldRemind == true {
             remindTimeLabel.attributedText = NSAttributedString(string: "\(formatter.string(from: item.dueDate)) 前完成", attributes: rememberAndImportantAttributes)
@@ -147,7 +146,7 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
         }
         
         configureCheckmark(for: cell, at: indexPath)
-
+        
         // Configure the cell...
         
         //configure right buttons
@@ -189,7 +188,7 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
             })]
             cell.leftSwipeSettings.transition = MGSwipeTransition.clipCenter
         }
-
+        
         return cell
     }
     
@@ -197,7 +196,7 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
         super.viewDidAppear(true)
         self.tableView.reloadData()
     }
-
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //cell会重用,不要用cell存储数据,也就是说不要用cell做DataModel
         /*
@@ -205,10 +204,10 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
          */
         /*
          if cell.accessoryType == .none {
-            cell.accessoryType = .checkmark
+         cell.accessoryType = .checkmark
          }
          else {
-            cell.accessoryType = .none
+         cell.accessoryType = .none
          }
          */
         tableView.deselectRow(at: indexPath, animated: true)
@@ -232,7 +231,7 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
                 print("6666")
             }
         }
-        
+            
         else if segue.identifier == "ShowDetail" {
             let detailController = segue.destination as! DetailViewController
             let indexPath = sender as! IndexPath
@@ -393,5 +392,5 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
     func emptyDataSetShouldAnimateImageView(_ scrollView: UIScrollView!) -> Bool {
         return false
     }
-
+    
 }

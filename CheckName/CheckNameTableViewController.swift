@@ -8,42 +8,41 @@
 
 import UIKit
 
-@available(iOS 10.0, *)
 class CheckNameTableViewController: UITableViewController,AddItemViewControllerDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate {
     var typeNames:TypeListItem!
     
     /*required init?(coder aDcoder: NSCoder) { //在类的构造器前添加required修饰符表明所有该类的子类都必须实现该构造器,重写父类中必要的制定构造器时不需要添加override修饰符
-        //如果子类继承的构造器能满足必要构造器的要求,则无须在子类中显式提供必要构造器的实现
-        typeNames.items = [NameItem]()
-        
-        /*let item0 = NameItem()
-        item0.name = "TangJian"
-        item0.charge = false
-        items.append(item0)
-        
-        let item1 = NameItem()
-        item1.name = "ShiFeng"
-        item1.charge = false
-        items.append(item1)
-        
-        let item2 = NameItem()
-        item2.name = "WangShuai"
-        item2.charge = false
-        items.append(item2)
-        
-        let item3 = NameItem()
-        item3.name = "WangKai"
-        item3.charge = false
-        items.append(item3)
-        
-        let item4 = NameItem()
-        item4.name = "LiJiesheng"
-        item4.charge = false
-        items.append(item4)*/
-        super.init(coder: aDcoder)
+     //如果子类继承的构造器能满足必要构造器的要求,则无须在子类中显式提供必要构造器的实现
+     typeNames.items = [NameItem]()
      
-        //loadChecklistItems()
-    }*/
+     /*let item0 = NameItem()
+     item0.name = "TangJian"
+     item0.charge = false
+     items.append(item0)
+     
+     let item1 = NameItem()
+     item1.name = "ShiFeng"
+     item1.charge = false
+     items.append(item1)
+     
+     let item2 = NameItem()
+     item2.name = "WangShuai"
+     item2.charge = false
+     items.append(item2)
+     
+     let item3 = NameItem()
+     item3.name = "WangKai"
+     item3.charge = false
+     items.append(item3)
+     
+     let item4 = NameItem()
+     item4.name = "LiJiesheng"
+     item4.charge = false
+     items.append(item4)*/
+     super.init(coder: aDcoder)
+     
+     //loadChecklistItems()
+     }*/
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +53,7 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
         self.tableView.rowHeight = 100 //改变row高度
         //self.tableView.reloadData() //在这里刷新会导致空白页面的标签位置错误
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -62,23 +61,23 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-   
     
     
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        return 2
-//    }
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        
-//        let date = typeNames.items[section].nowDate
-//        let formatter = DateFormatter()
-//        formatter.dateStyle = .medium
-//        formatter.timeStyle = .short
-//        let nowTimeFormatter = DateFormatter()
-//        nowTimeFormatter.dateFormat = "MM月dd日"
-//        return nowTimeFormatter.string(from: date)
-//        
-//    }
+    
+    //    override func numberOfSections(in tableView: UITableView) -> Int {
+    //        return 2
+    //    }
+    //    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    //
+    //        let date = typeNames.items[section].nowDate
+    //        let formatter = DateFormatter()
+    //        formatter.dateStyle = .medium
+    //        formatter.timeStyle = .short
+    //        let nowTimeFormatter = DateFormatter()
+    //        nowTimeFormatter.dateFormat = "MM月dd日"
+    //        return nowTimeFormatter.string(from: date)
+    //
+    //    }
     
     
     
@@ -133,22 +132,22 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
         
         let nowTimeFormatter = DateFormatter()
         nowTimeFormatter.dateFormat = "MM月dd日"
-//        nowTimeFormatter.dateStyle = .short
-//        nowTimeFormatter.timeStyle = .none
-//        print(item.nowDate)
-//        print(nowTimeFormatter.string(from: item.nowDate))
+        //        nowTimeFormatter.dateStyle = .short
+        //        nowTimeFormatter.timeStyle = .none
+        //        print(item.nowDate)
+        //        print(nowTimeFormatter.string(from: item.nowDate))
         nowTimeLabel.text = nowTimeFormatter.string(from: item.nowDate)
         
         if item.shouldImportant == true {
-//            label.textColor = UIColor.red
-//            importantLabel.textColor = UIColor.red
+            //            label.textColor = UIColor.red
+            //            importantLabel.textColor = UIColor.red
             importantLabel.attributedText = NSAttributedString(string: "这个计划很重要!", attributes: rememberAndImportantAttributes)
-//            remindTimeLabel.textColor = UIColor.red
+            //            remindTimeLabel.textColor = UIColor.red
         } else {
-//            label.textColor = UIColor.black
-//            importantLabel.textColor = UIColor.darkGray
+            //            label.textColor = UIColor.black
+            //            importantLabel.textColor = UIColor.darkGray
             importantLabel.attributedText = NSAttributedString(string: "合理规划并管理你的生活", attributes: rememberAndImportantAttributes)
-//            remindTimeLabel.textColor = UIColor.darkGray
+            //            remindTimeLabel.textColor = UIColor.darkGray
         }
         if item.shouldRemind == true {
             remindTimeLabel.attributedText = NSAttributedString(string: "\(formatter.string(from: item.dueDate)) 前完成", attributes: rememberAndImportantAttributes)
@@ -163,29 +162,34 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
         }
         
         /*if item.charge == true {
-            //如果计划完成就添加删除线
-            let attribtStr = NSMutableAttributedString(string: item.name)
-            attribtStr.addAttribute(NSStrikethroughStyleAttributeName, value: NSNumber(value: 1), range: NSMakeRange(0, 3))
-            label.attributedText = attribtStr
-            label.sizeToFit()
-            
-            self.view.addSubview(label)
-        }*/
+         //如果计划完成就添加删除线
+         let attribtStr = NSMutableAttributedString(string: item.name)
+         attribtStr.addAttribute(NSStrikethroughStyleAttributeName, value: NSNumber(value: 1), range: NSMakeRange(0, 3))
+         label.attributedText = attribtStr
+         label.sizeToFit()
+         
+         self.view.addSubview(label)
+         }*/
         
         configureCheckmark(for: cell, at: indexPath)
         
         //configure right buttons
-        cell.rightButtons = [MGSwipeButton(title: "删除", backgroundColor: UIColor.red, callback: {
+        cell.rightButtons = [MGSwipeButton(title: "删除", backgroundColor: UIColor.red, callback: { [weak self]
             (sender: MGSwipeTableCell!) -> Bool in
-            print("Convenience callback for swipe rightButtons!")
-            let cellIndexPath = self.tableView.indexPath(for: cell)!
-            self.typeNames.items.remove(at: cellIndexPath.row)
-            let indexPaths = [cellIndexPath]
-            tableView.deleteRows(at: indexPaths, with: .fade)
-            if self.typeNames.items.count == 0 { //每次删除cell后调用tableView.reloadData()特别消耗资源,这里做了优化
-                tableView.reloadData()
+            if let strongSelf = self {
+                print("Convenience callback for swipe rightButtons!")
+                let cellIndexPath = strongSelf.tableView.indexPath(for: cell)!
+                strongSelf.typeNames.items[cellIndexPath.row].removeNotification()
+                strongSelf.typeNames.items.remove(at: cellIndexPath.row)
+                let indexPaths = [cellIndexPath]
+                tableView.deleteRows(at: indexPaths, with: .fade)
+                if strongSelf.typeNames.items.count == 0 { //每次删除cell后调用tableView.reloadData()特别消耗资源,这里做了优化
+                    tableView.reloadData()
+                }
+                return true
+            } else {
+                return false
             }
-            return true
         })]
         cell.rightSwipeSettings.transition = MGSwipeTransition.clipCenter
         
@@ -238,7 +242,7 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
                 print("6666")
             }
         }
-        
+            
         else if segue.identifier == "ShowDetail" {
             let detailController = segue.destination as! DetailViewController
             let indexPath = sender as! IndexPath
@@ -265,16 +269,16 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
         let label = cell.viewWithTag(1001) as! UILabel
         
         /*let mainLabel = cell.viewWithTag(1000) as! UILabel
-        let importantLabel = cell.viewWithTag(1100) as! UILabel
-        let remindTimeLabel = cell.viewWithTag(1200) as! UILabel*/
+         let importantLabel = cell.viewWithTag(1100) as! UILabel
+         let remindTimeLabel = cell.viewWithTag(1200) as! UILabel*/
         
         isChecked = item.charge
         
         if isChecked {
             label.text = "我已搞定"
             /*mainLabel.textColor = UIColor.gray
-            importantLabel.textColor = UIColor.gray
-            remindTimeLabel.textColor = UIColor.gray*/
+             importantLabel.textColor = UIColor.gray
+             remindTimeLabel.textColor = UIColor.gray*/
         }
         else {
             label.text = ""
@@ -314,27 +318,27 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
     
     //保存和读取
     /*func documentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return paths[0]
-    }
-    func dataFilePath() -> URL {
-        return documentsDirectory().appendingPathComponent("Checklists.plist")
-    }
-    func saveChecklistItems() {
-        let data = NSMutableData()
-        let archiver = NSKeyedArchiver(forWritingWith: data)
-        archiver.encode(typeNames.items, forKey: "ChecklistItems")
-        archiver.finishEncoding()
-        data.write(to: dataFilePath(), atomically: true)
-    }
-    func loadChecklistItems() {
-        let path = dataFilePath()
-        if let data = try? Data(contentsOf: path) {
-            let unarchiver = NSKeyedUnarchiver(forReadingWith: data)
-            typeNames.items = unarchiver.decodeObject(forKey: "ChecklistItems") as! [NameItem]
-            unarchiver.finishDecoding()
-        }
-    }*/
+     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+     return paths[0]
+     }
+     func dataFilePath() -> URL {
+     return documentsDirectory().appendingPathComponent("Checklists.plist")
+     }
+     func saveChecklistItems() {
+     let data = NSMutableData()
+     let archiver = NSKeyedArchiver(forWritingWith: data)
+     archiver.encode(typeNames.items, forKey: "ChecklistItems")
+     archiver.finishEncoding()
+     data.write(to: dataFilePath(), atomically: true)
+     }
+     func loadChecklistItems() {
+     let path = dataFilePath()
+     if let data = try? Data(contentsOf: path) {
+     let unarchiver = NSKeyedUnarchiver(forReadingWith: data)
+     typeNames.items = unarchiver.decodeObject(forKey: "ChecklistItems") as! [NameItem]
+     unarchiver.finishDecoding()
+     }
+     }*/
     
     //实现第三方库协议的方法
     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
@@ -352,12 +356,12 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
         paragraph.alignment = .center
         let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: CGFloat(14.0)), NSForegroundColorAttributeName: UIColor.lightGray, NSParagraphStyleAttributeName: paragraph]
         return NSAttributedString(string: text, attributes: attributes)
-
+        
     }
     func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
         let attributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: CGFloat(17.0))]
         return NSAttributedString(string: "让我们开始吧", attributes: attributes)
-
+        
     }
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
         //print("成功调用!")
@@ -387,5 +391,5 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
         return false
     }
     
-
+    
 }

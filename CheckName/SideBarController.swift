@@ -12,6 +12,12 @@ import CoreLocation
 class SideBarController: UITableViewController,CLLocationManagerDelegate {
     
     @IBOutlet weak var weatherLabel: UILabel!
+    @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var quickLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var importantLabel: UILabel!
+    
+    var helpItems = [KSGuideItem]()
     
     var dataTask: URLSessionTask?
     var totalWetherString: String?
@@ -198,6 +204,11 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        showHelp()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         
@@ -271,6 +282,30 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
             return "jilin"
         default:
             return "error"
+        }
+    }
+    
+    //展示引导页
+    func showHelp() {
+        // Reset to show everytime.
+//        KSGuideDataManager.reset(for: "SideBarGuide")
+        
+        let weatherItem = KSGuideItem(sourceView: weatherLabel, text: "这是你所在城市的天气,第一次查看需要获取网络和定位权限才能正常显示哟~")
+        helpItems.append(weatherItem)
+        let typeItem = KSGuideItem(sourceView: typeLabel, text: "这是计划类别,点击就可以进入到应用主页~")
+        helpItems.append(typeItem)
+        let quickItem = KSGuideItem(sourceView: quickLabel, text: "快速计划不需要创建类别,可以直接新建一个计划~")
+        helpItems.append(quickItem)
+        let timeItem = KSGuideItem(sourceView: timeLabel, text: "这里将你的所有计划按照时间排序~")
+        helpItems.append(timeItem)
+        let importantItem = KSGuideItem(sourceView: importantLabel, text: "这里是你所有标记为重要的计划~")
+        helpItems.append(importantItem)
+        let vc = KSGuideController(items: helpItems, key: "SideBarGuide")
+        vc.setIndexChangeBlock { (index, item) in
+            print("Index has change to \(index)")
+        }
+        vc.show(from: self) {
+            print("Guide controller has been dismissed")
         }
     }
 }

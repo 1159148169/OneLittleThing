@@ -11,52 +11,56 @@ import UIKit
 class SuperNameTableViewController: UITableViewController,AddNewListTypeDelegate,DZNEmptyDataSetDelegate,DZNEmptyDataSetSource {
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
+    @IBOutlet weak var addTypeButton: UIBarButtonItem!
     
     var lists:[TypeListItem]
+    
+    // 引导页变量
+    var helpItems = [KSGuideItem]()
     
     required init?(coder aDcoder: NSCoder) {
         lists = [TypeListItem]()
         /*let item0 = TypeListItem(name: "Study") //必须自己定义一个构造器
-        lists.append(item0)
-        
-        let item1 = TypeListItem(name: "Sports")
-        lists.append(item1)
-        
-        let item2 = TypeListItem(name: "Works")
-        lists.append(item2)
-        
-        let item3 = TypeListItem(name: "Life")
-        lists.append(item3)
-        
-        let item4 = TypeListItem(name: "Buy")
-        lists.append(item4)
-        
-        let item5 = TypeListItem(name: "Others")
-        lists.append(item5)*/
+         lists.append(item0)
+         
+         let item1 = TypeListItem(name: "Sports")
+         lists.append(item1)
+         
+         let item2 = TypeListItem(name: "Works")
+         lists.append(item2)
+         
+         let item3 = TypeListItem(name: "Life")
+         lists.append(item3)
+         
+         let item4 = TypeListItem(name: "Buy")
+         lists.append(item4)
+         
+         let item5 = TypeListItem(name: "Others")
+         lists.append(item5)*/
         
         super.init(coder: aDcoder)
         loadChecklist()
         //以下循环用来测试
         /*for list in lists {
-            let name = NameItem()
-            name.name = "Item for \(list.name)"
-            list.items.append(name)
-        }*/
+         let name = NameItem()
+         name.name = "Item for \(list.name)"
+         list.items.append(name)
+         }*/
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.revealViewController().tapGestureRecognizer()
         self.tableView.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
-//        let panGestureRecognizer = UITapGestureRecognizer(target: self.revealViewController, action: #selector(SWRevealViewController.revealToggle(_:)))
-//        self.tableView.addGestureRecognizer(panGestureRecognizer)
+        //        let panGestureRecognizer = UITapGestureRecognizer(target: self.revealViewController, action: #selector(SWRevealViewController.revealToggle(_:)))
+        //        self.tableView.addGestureRecognizer(panGestureRecognizer)
         
         //判断屏幕是否支持3d touch
         /*if traitCollection.forceTouchCapability == .available {
-            registerForPreviewing(with: self, sourceView: tableView) //这里的sourceView指的是触发peek动作的view
-        }*/
+         registerForPreviewing(with: self, sourceView: tableView) //这里的sourceView指的是触发peek动作的view
+         }*/
         
         if self.revealViewController() != nil {
             menuButton.target = self.revealViewController()
@@ -75,12 +79,12 @@ class SuperNameTableViewController: UITableViewController,AddNewListTypeDelegate
         //self.tableView.animateCells(animation: .left(duration: 1))
         //self.tableView.reloadData()
     }
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return lists.count
@@ -95,11 +99,16 @@ class SuperNameTableViewController: UITableViewController,AddNewListTypeDelegate
         tableView.reloadData() //当调用viewWillAppear方法时程序第一次启动会出现空白页错位的情况,原因未知
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        saveChecklist()
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> TypeTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SuperNameListCell", for: indexPath) as! TypeTableViewCell
         
-//        //获取每一个cell之后,把cell注册给控制器,这样我们才可以在重按的时候显示Peek视图
-//        self.registerForPreviewing(with: self, sourceView: cell) //使用控制器调用方法,注册previewAction的代理和视图
+        //        //获取每一个cell之后,把cell注册给控制器,这样我们才可以在重按的时候显示Peek视图
+        //        self.registerForPreviewing(with: self, sourceView: cell) //使用控制器调用方法,注册previewAction的代理和视图
         
         let listTypeLabel = cell.viewWithTag(2000) as! UILabel
         let remainNumLabel = cell.viewWithTag(2001) as! UILabel
@@ -107,7 +116,8 @@ class SuperNameTableViewController: UITableViewController,AddNewListTypeDelegate
         let item = lists[indexPath.row]
         let finishNum = item.countItemChecked()
         listTypeLabel.text = item.name
-        cell.backgroundView = item.typeImageView
+//        cell.backgroundView = item.typeImageView
+        cell.imgBack.image = item.typeImage
         
         if item.items.count == 0 {
             remainNumLabel.text = "还未添加计划"
@@ -118,7 +128,7 @@ class SuperNameTableViewController: UITableViewController,AddNewListTypeDelegate
                 remainNumLabel.text = "还剩\(item.countItemChecked())个计划未完成"
             }
         }
-
+        
         // Configure the cell...
         
         //configure right buttons
@@ -127,7 +137,12 @@ class SuperNameTableViewController: UITableViewController,AddNewListTypeDelegate
             (sender: MGSwipeTableCell!) -> Bool in
             print("Convenience callback for swipe buttons!")
             let cellIndexPath = self.tableView.indexPath(for: cell)!
+            for i in 0 ..< self.lists[cellIndexPath.row].items.count {
+                self.lists[cellIndexPath.row].items[i].removeNotification()
+                print("从计划类型页面删除!")
+            }
             self.lists.remove(at: cellIndexPath.row)
+            self.saveChecklist()
             let indexPaths = [cellIndexPath]
             tableView.deleteRows(at: indexPaths, with: .fade)
             if self.lists.count == 0 { //每次删除cell后调用tableView.reloadData()特别消耗资源,这里做了优化
@@ -137,9 +152,33 @@ class SuperNameTableViewController: UITableViewController,AddNewListTypeDelegate
         })]
         
         cell.rightSwipeSettings.transition = MGSwipeTransition.clipCenter
-
+        
         return cell
     }
+    
+    //MARK: - 视差列表
+//    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if (scrollView == self.tableView) {
+//            for indexPath in self.tableView.indexPathsForVisibleRows! {
+//                self.setCellImageOffset(self.tableView.cellForRow(at: indexPath) as! TypeTableViewCell, indexPath: indexPath as NSIndexPath)
+//            }
+//        }
+//    }
+//    
+//    func setCellImageOffset(_ cell: TypeTableViewCell, indexPath: NSIndexPath) {
+//        let cellFrame = self.tableView.rectForRow(at: indexPath as IndexPath)
+//        let cellFrameInTable = self.tableView.convert(cellFrame, to:self.tableView.superview)
+//        let cellOffset = cellFrameInTable.origin.y + cellFrameInTable.size.height
+//        let tableHeight = self.tableView.bounds.size.height + cellFrameInTable.size.height
+//        let cellOffsetFactor = cellOffset / tableHeight
+//        cell.setBackgroundOffset(cellOffsetFactor)
+//    }
+//    
+//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        let imageCell = cell as! TypeTableViewCell
+//        self.setCellImageOffset(imageCell, indexPath: indexPath as NSIndexPath)
+//    }
+    
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let typeNames = lists[indexPath.row]
@@ -151,7 +190,7 @@ class SuperNameTableViewController: UITableViewController,AddNewListTypeDelegate
         if segue.identifier == "ShowDetail" {
             if #available(iOS 10.0, *) {
                 let controller = segue.destination as! CheckNameTableViewController
-                 controller.typeNames = sender as! TypeListItem
+                controller.typeNames = sender as! TypeListItem
             } else {
                 // Fallback on earlier versions
             }  }
@@ -210,6 +249,23 @@ class SuperNameTableViewController: UITableViewController,AddNewListTypeDelegate
         }
     }
     
+    //展示引导页
+    func showHelp(_ helpButton: UIButton!) {
+        // Reset to show everytime.
+         KSGuideDataManager.reset(for: "MainGuide")
+        
+        let helpItem = KSGuideItem(sourceView: helpButton, text: "这是一个简短的使用帮助,可以让你更快地了解如何使用该应用:\n\n这个页面用来添加计划的类别,然后你可以在对应的类别中添加计划\n\n每个计划都可以设置不同的属性,在添加或编辑计划时你就会看到\n\n侧滑菜单中将计划以不同的种类做了区分,你可以在侧滑菜单中找到更多有用的帮助信息~\n")
+        helpItems.append(helpItem)
+        let vc = KSGuideController(items: helpItems, key: "MainGuide")
+        vc.setIndexChangeBlock { (index, item) in
+            print("Index has change to \(index)")
+        }
+        vc.show(from: self) {
+            print("Guide controller has been dismissed")
+        }
+        helpItems.removeAll()
+    }
+    
     //DZNEmptyDataSet协议中方法的实现
     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
         return UIImage(named: "EmptyPage.png")
@@ -220,7 +276,7 @@ class SuperNameTableViewController: UITableViewController,AddNewListTypeDelegate
         return NSAttributedString(string: text, attributes: attributes)
     }
     func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "在这里你将自己的计划分类以使自己的计划更有条理\n点击右上角的 + 选择一个类别\n开始有计划的生活"
+        let text = "这里你将自己的计划分类以使得计划更有条理\n点击右上角的 + 选择一个类别\n侧滑菜单可以帮助你更好地管理自己\n马上开始有计划的生活"
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineBreakMode = .byWordWrapping
         paragraph.alignment = .center
@@ -248,6 +304,10 @@ class SuperNameTableViewController: UITableViewController,AddNewListTypeDelegate
         return animation
     }
     
+    func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
+        showHelp(button)
+    }
+    
     func emptyDataSetShouldDisplay(_ scrollView: UIScrollView!) -> Bool {
         return true
     }
@@ -261,16 +321,16 @@ class SuperNameTableViewController: UITableViewController,AddNewListTypeDelegate
         return false
     }
     
-//    //实现peek和pop
-//    //peek
-//    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-//        
-//        //建立新的控制器
-//        
-//        return nil
-//    }
-//    //pop
-//    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-//    }
-
+    //    //实现peek和pop
+    //    //peek
+    //    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+    //
+    //        //建立新的控制器
+    //
+    //        return nil
+    //    }
+    //    //pop
+    //    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+    //    }
+    
 }

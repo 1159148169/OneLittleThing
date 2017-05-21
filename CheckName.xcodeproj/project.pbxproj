@@ -11,11 +11,18 @@
 		8B0771FD1DEEA679009C25C5 /* DateTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0771FA1DEEA679009C25C5 /* DateTimePicker.swift */; };
 		8B0771FE1DEEA679009C25C5 /* StepCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0771FB1DEEA679009C25C5 /* StepCollectionViewFlowLayout.swift */; };
 		8B1590BC1E2CF004003B2197 /* TypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1590BB1E2CF004003B2197 /* TypeTableViewCell.swift */; };
+		8B36D18B1EC1AF5300DC97CF /* ParallaxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36D18A1EC1AF5300DC97CF /* ParallaxTableViewCell.swift */; };
 		8B46516B1E9227A700874BFD /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B46516A1E9227A700874BFD /* DetailViewController.swift */; };
 		8B46516D1E922CB400874BFD /* DimmingPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B46516C1E922CB400874BFD /* DimmingPresentationController.swift */; };
 		8B46516F1E9268ED00874BFD /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B46516E1E9268ED00874BFD /* GradientView.swift */; };
 		8B4651711E926D8F00874BFD /* BounceAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4651701E926D8F00874BFD /* BounceAnimationController.swift */; };
 		8B4651731E926EA100874BFD /* SlideOutAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4651721E926EA100874BFD /* SlideOutAnimationController.swift */; };
+		8B4693F31ECF10D6004891DD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4693ED1ECF10D6004891DD /* Extensions.swift */; };
+		8B4693F41ECF10D6004891DD /* KSGuideController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4693EE1ECF10D6004891DD /* KSGuideController.swift */; };
+		8B4693F51ECF10D6004891DD /* KSGuideDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4693EF1ECF10D6004891DD /* KSGuideDataManager.swift */; };
+		8B4693F61ECF10D6004891DD /* KSGuideItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4693F01ECF10D6004891DD /* KSGuideItem.swift */; };
+		8B4693F71ECF10D6004891DD /* guide_arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B4693F21ECF10D6004891DD /* guide_arrow@3x.png */; };
+		8B67818F1EC0AFAA00E3A1F6 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B67818E1EC0AFAA00E3A1F6 /* Banner.swift */; };
 		8B75DDBE1DDB24A200D038E1 /* DZNEmptyDataSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B75DDBD1DDB24A200D038E1 /* DZNEmptyDataSet.framework */; };
 		8B7F8F391DDC8FA000A622D9 /* NewTypeListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F8F381DDC8FA000A622D9 /* NewTypeListTableViewController.swift */; };
 		8B869D4A1E8A51BA00159024 /* SideBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B869D491E8A51BA00159024 /* SideBarController.swift */; };
@@ -44,11 +51,18 @@
 		8B0771FA1DEEA679009C25C5 /* DateTimePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimePicker.swift; sourceTree = "<group>"; };
 		8B0771FB1DEEA679009C25C5 /* StepCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		8B1590BB1E2CF004003B2197 /* TypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeTableViewCell.swift; sourceTree = "<group>"; };
+		8B36D18A1EC1AF5300DC97CF /* ParallaxTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxTableViewCell.swift; sourceTree = "<group>"; };
 		8B46516A1E9227A700874BFD /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		8B46516C1E922CB400874BFD /* DimmingPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimmingPresentationController.swift; sourceTree = "<group>"; };
 		8B46516E1E9268ED00874BFD /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		8B4651701E926D8F00874BFD /* BounceAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BounceAnimationController.swift; sourceTree = "<group>"; };
 		8B4651721E926EA100874BFD /* SlideOutAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideOutAnimationController.swift; sourceTree = "<group>"; };
+		8B4693ED1ECF10D6004891DD /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		8B4693EE1ECF10D6004891DD /* KSGuideController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSGuideController.swift; sourceTree = "<group>"; };
+		8B4693EF1ECF10D6004891DD /* KSGuideDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSGuideDataManager.swift; sourceTree = "<group>"; };
+		8B4693F01ECF10D6004891DD /* KSGuideItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KSGuideItem.swift; sourceTree = "<group>"; };
+		8B4693F21ECF10D6004891DD /* guide_arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_arrow@3x.png"; sourceTree = "<group>"; };
+		8B67818E1EC0AFAA00E3A1F6 /* Banner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		8B75DDBD1DDB24A200D038E1 /* DZNEmptyDataSet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DZNEmptyDataSet.framework; path = Carthage/Build/iOS/DZNEmptyDataSet.framework; sourceTree = "<group>"; };
 		8B75DDC11DDB2CAE00D038E1 /* CheckName-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CheckName-Bridging-Header.h"; sourceTree = "<group>"; };
 		8B7F8F381DDC8FA000A622D9 /* NewTypeListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTypeListTableViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +120,7 @@
 		8B0771F81DEEA679009C25C5 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				8B67818E1EC0AFAA00E3A1F6 /* Banner.swift */,
 				8B0771F91DEEA679009C25C5 /* DateCollectionViewCell.swift */,
 				8B0771FA1DEEA679009C25C5 /* DateTimePicker.swift */,
 				8B0771FB1DEEA679009C25C5 /* StepCollectionViewFlowLayout.swift */,
@@ -113,6 +128,26 @@
 			);
 			name = Source;
 			path = ../Source;
+			sourceTree = "<group>";
+		};
+		8B4693EC1ECF10D6004891DD /* KSGuideController */ = {
+			isa = PBXGroup;
+			children = (
+				8B4693ED1ECF10D6004891DD /* Extensions.swift */,
+				8B4693EE1ECF10D6004891DD /* KSGuideController.swift */,
+				8B4693EF1ECF10D6004891DD /* KSGuideDataManager.swift */,
+				8B4693F01ECF10D6004891DD /* KSGuideItem.swift */,
+				8B4693F11ECF10D6004891DD /* Resources */,
+			);
+			path = KSGuideController;
+			sourceTree = "<group>";
+		};
+		8B4693F11ECF10D6004891DD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8B4693F21ECF10D6004891DD /* guide_arrow@3x.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		8B8820131E2B6E8300CE851A /* SWRevealViewController */ = {
@@ -145,6 +180,7 @@
 		8BC0712D1DCB5A0200A3BFA3 /* CheckName */ = {
 			isa = PBXGroup;
 			children = (
+				8B4693EC1ECF10D6004891DD /* KSGuideController */,
 				8B8820131E2B6E8300CE851A /* SWRevealViewController */,
 				8BD4F85C1DE473A900426590 /* Header */,
 				8B0771F81DEEA679009C25C5 /* Source */,
@@ -161,6 +197,7 @@
 			children = (
 				8B8C1B0B1DD0B534002AA63D /* NameListItem.swift */,
 				8B1590BB1E2CF004003B2197 /* TypeTableViewCell.swift */,
+				8B36D18A1EC1AF5300DC97CF /* ParallaxTableViewCell.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -277,6 +314,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B4693F71ECF10D6004891DD /* guide_arrow@3x.png in Resources */,
 				8BC071391DCB5A0200A3BFA3 /* LaunchScreen.storyboard in Resources */,
 				8BC071361DCB5A0200A3BFA3 /* Assets.xcassets in Resources */,
 				8BC071341DCB5A0200A3BFA3 /* Main.storyboard in Resources */,
@@ -356,20 +394,26 @@
 				8B46516D1E922CB400874BFD /* DimmingPresentationController.swift in Sources */,
 				8B46516F1E9268ED00874BFD /* GradientView.swift in Sources */,
 				8B7F8F391DDC8FA000A622D9 /* NewTypeListTableViewController.swift in Sources */,
+				8B67818F1EC0AFAA00E3A1F6 /* Banner.swift in Sources */,
 				8B1590BC1E2CF004003B2197 /* TypeTableViewCell.swift in Sources */,
 				8B88201A1E2B832000CE851A /* TimePlanTableViewController.swift in Sources */,
 				8BC2934E1DD3474200F14782 /* AddNameListTableViewController.swift in Sources */,
 				8BD4F8581DE4736400426590 /* UITableView+TableFlip.swift in Sources */,
 				8BC0712F1DCB5A0200A3BFA3 /* AppDelegate.swift in Sources */,
+				8B4693F41ECF10D6004891DD /* KSGuideController.swift in Sources */,
 				8B0771FC1DEEA679009C25C5 /* DateCollectionViewCell.swift in Sources */,
 				8BEB63591DD9EB5C0068AEF1 /* SuperNameTableViewController.swift in Sources */,
 				8B46516B1E9227A700874BFD /* DetailViewController.swift in Sources */,
 				8B0771FE1DEEA679009C25C5 /* StepCollectionViewFlowLayout.swift in Sources */,
+				8B36D18B1EC1AF5300DC97CF /* ParallaxTableViewCell.swift in Sources */,
 				8B4651711E926D8F00874BFD /* BounceAnimationController.swift in Sources */,
 				8B0771FD1DEEA679009C25C5 /* DateTimePicker.swift in Sources */,
+				8B4693F51ECF10D6004891DD /* KSGuideDataManager.swift in Sources */,
+				8B4693F61ECF10D6004891DD /* KSGuideItem.swift in Sources */,
 				8B8820181E2B830B00CE851A /* QuickPlanTableViewController.swift in Sources */,
 				8B869D4C1E8B983200159024 /* HudView.swift in Sources */,
 				8B8820161E2B6E8300CE851A /* SWRevealViewController.m in Sources */,
+				8B4693F31ECF10D6004891DD /* Extensions.swift in Sources */,
 				8BC071411DCB5A3600A3BFA3 /* CheckNameTableViewController.swift in Sources */,
 				8B4651731E926EA100874BFD /* SlideOutAnimationController.swift in Sources */,
 				8B8C1B0C1DD0B534002AA63D /* NameListItem.swift in Sources */,
@@ -505,7 +549,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = CheckName/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shifeng.onelittlething;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -530,7 +574,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = CheckName/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shifeng.onelittlething;
 				PRODUCT_NAME = "$(TARGET_NAME)";
