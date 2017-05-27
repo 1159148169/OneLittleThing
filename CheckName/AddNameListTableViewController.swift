@@ -16,6 +16,14 @@ protocol AddItemViewControllerDelegate: class {
     func editItemViewControllerDidDone(_ controller: AddNameListTableViewController, didFinishEditing item: NameItem)
 }
 
+struct PostNotificationName {
+    static let Finish10Post = Notification.Name(rawValue: "Finish10")
+    static let Finish50Post = Notification.Name(rawValue: "Finish50")
+    static let Finish100Post = Notification.Name(rawValue: "Finish100")
+    static let Finish500Post = Notification.Name(rawValue: "Finish500")
+    static let Finish1000Post = Notification.Name(rawValue: "Finish1000")
+}
+
 class AddNameListTableViewController: UITableViewController,UITextFieldDelegate {
     
     weak var delegate:AddItemViewControllerDelegate?
@@ -90,6 +98,10 @@ class AddNameListTableViewController: UITableViewController,UITextFieldDelegate 
     }
     
     @IBAction func done() {
+        
+        let planDoneNum = UserDefaults.standard.integer(forKey: "PlanAllDoneNum")
+        UserDefaults.standard.set(planDoneNum + 1, forKey: "PlanAllDoneNum") // 从0开始
+//        print(planDoneNum)
         
         let hudView = HudView.hud(inView: navigationController!.view, animated: true)
         
@@ -171,6 +183,24 @@ class AddNameListTableViewController: UITableViewController,UITextFieldDelegate 
             let delayInSeconds = 0.6
             DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds, execute: {
                 self.delegate?.addItemViewControllerDidDone(self, didFinishAdding: newName)
+                
+                
+                switch planDoneNum {
+                case 9:
+                    NotificationCenter.default.post(name: PostNotificationName.Finish10Post, object: nil)
+                case 49:
+                    NotificationCenter.default.post(name: PostNotificationName.Finish50Post, object: nil)
+                case 99:
+                    NotificationCenter.default.post(name: PostNotificationName.Finish100Post, object: nil)
+                case 499:
+                    NotificationCenter.default.post(name: PostNotificationName.Finish500Post, object: nil)
+                case 999:
+                    NotificationCenter.default.post(name: PostNotificationName.Finish1000Post, object: nil)
+                default:
+                    break
+                }
+                
+                
             })
             
         }

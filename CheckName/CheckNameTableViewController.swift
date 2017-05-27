@@ -212,11 +212,88 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
                 self.configureCheckmark(for: cell, at: indexPath)
                 tableView.reloadData()
                 
+                let planFinishedNum = UserDefaults.standard.integer(forKey: "PlanAllFinishedNum")
+                UserDefaults.standard.set(planFinishedNum + 1, forKey: "PlanAllFinishedNum") // 从0开始
+                
+                switch planFinishedNum {
+                case 9:
+                    let alert = UIAlertController(title: "很棒", message: "你已经完成了10个计划,并且获得了\"经验宝宝\"勋章!现在你可以在\"我的成就\"列表中查看你的成就!", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "好", style: .default, handler: nil)
+                    alert.addAction(action)
+                    self.present(alert, animated: true, completion: nil)
+                case 49:
+                    let alert = UIAlertController(title: "很棒", message: "你已经完成了50个计划,并且获得了\"浪里个浪\"勋章!现在你可以在\"我的成就\"列表中查看你的成就!", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "好", style: .default, handler: nil)
+                    alert.addAction(action)
+                    self.present(alert, animated: true, completion: nil)
+                case 99:
+                    let alert = UIAlertController(title: "很棒", message: "你已经完成了100个计划,并且获得了\"计划达人\"勋章!现在你可以在\"我的成就\"列表中查看你的成就!", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "好", style: .default, handler: nil)
+                    alert.addAction(action)
+                    self.present(alert, animated: true, completion: nil)
+                case 499:
+                    let alert = UIAlertController(title: "哇塞", message: "你已经完成了500个计划,并且获得了\"走火入魔\"勋章!Amazing!现在你可以在\"我的成就\"列表中查看你的成就!", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "好", style: .default, handler: nil)
+                    alert.addAction(action)
+                    self.present(alert, animated: true, completion: nil)
+                case 999:
+                    let alert = UIAlertController(title: "天啊", message: "你已经完成了1000个计划!这枚\"6得不行\"勋章是你的了!简直不敢相信!现在你可以在\"我的成就\"列表中查看你的成就!", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "好", style: .default, handler: nil)
+                    alert.addAction(action)
+                    self.present(alert, animated: true, completion: nil)
+                default:
+                    break
+                }
+                
                 return true
             })]
             cell.leftSwipeSettings.transition = MGSwipeTransition.clipCenter
         }
         return cell
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        NotificationCenter.default.addObserver(forName: PostNotificationName.Finish10Post, object: nil, queue: OperationQueue.main) { (Notification) in
+            // 添加了10个计划
+            let alert = UIAlertController(title: "很棒", message: "你已经做了10个计划,并且获得了\"初出茅庐\"勋章!现在你可以在\"我的成就\"列表中查看你的成就!", preferredStyle: .alert)
+            let action = UIAlertAction(title: "好", style: .default, handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+
+        }
+        NotificationCenter.default.addObserver(forName: PostNotificationName.Finish50Post, object: nil, queue: OperationQueue.main) { (Notification) in
+            // 添加了50个计划
+            let alert = UIAlertController(title: "很棒", message: "你已经做了50个计划,并且获得了\"小试牛刀\"勋章!现在你可以在\"我的成就\"列表中查看你的成就!", preferredStyle: .alert)
+            let action = UIAlertAction(title: "好", style: .default, handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+
+        }
+        NotificationCenter.default.addObserver(forName: PostNotificationName.Finish100Post, object: nil, queue: OperationQueue.main) { (Notification) in
+            // 添加了100个计划
+            let alert = UIAlertController(title: "很棒", message: "你已经做了100个计划,并且获得了\"记录达人\"勋章!现在你可以在\"我的成就\"列表中查看你的成就!", preferredStyle: .alert)
+            let action = UIAlertAction(title: "好", style: .default, handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+
+        }
+        NotificationCenter.default.addObserver(forName: PostNotificationName.Finish500Post, object: nil, queue: OperationQueue.main) { (Notification) in
+            // 添加了500个计划
+            let alert = UIAlertController(title: "哇塞", message: "你已经做了500个计划,并且获得了\"排山倒海\"勋章!这简直不可思议!现在你可以在\"我的成就\"列表中查看你的成就!", preferredStyle: .alert)
+            let action = UIAlertAction(title: "好", style: .default, handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+
+        }
+        NotificationCenter.default.addObserver(forName: PostNotificationName.Finish1000Post, object: nil, queue: OperationQueue.main) { (Notification) in
+            // 添加了1000个计划
+            let alert = UIAlertController(title: "天哪!", message: "你已经做了1000个计划!连我都不得不说你简直太棒了!这枚\"6666\"勋章是你的了!现在你可以在\"我的成就\"列表中查看你的成就!", preferredStyle: .alert)
+            let action = UIAlertAction(title: "好", style: .default, handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

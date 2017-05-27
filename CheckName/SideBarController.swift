@@ -16,6 +16,8 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
     @IBOutlet weak var quickLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var importantLabel: UILabel!
+    @IBOutlet weak var historyLabel: UILabel!
+    @IBOutlet weak var achivementLabel: UILabel!
     
     var helpItems = [KSGuideItem]()
     
@@ -161,6 +163,7 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.sectionHeaderHeight = 28
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -215,6 +218,41 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
         stopLocation()
         dataTask?.cancel()
         
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return nil
+        } else if section == 1 {
+            return "My Plan"
+        } else {
+            return "Bingo"
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        // 标签视图
+        let labelRect = CGRect(x: 15, y: tableView.sectionHeaderHeight - 18, width: 300, height: 14)
+        let label = UILabel(frame: labelRect)
+        label.font = UIFont.boldSystemFont(ofSize: 11)
+        label.text = tableView.dataSource!.tableView!(tableView, titleForHeaderInSection: section)
+        // label.text = self.tableView（tableView，titleForHeaderInSection：section）此行代码和上面的那行功能相同
+        label.textColor = UIColor(white: 1.0, alpha: 0.4)
+        label.backgroundColor = UIColor.clear
+        
+        // 分隔线视图
+        let separatorRect = CGRect(x: 15, y: tableView.sectionHeaderHeight - 0.5, width: tableView.bounds.size.width - 15, height: 0.5)
+        let separator = UIView(frame: separatorRect)
+        separator.backgroundColor = tableView.separatorColor
+        
+        // 容器视图
+        let viewRect = CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.sectionHeaderHeight)
+        let view = UIView(frame: viewRect)
+        view.backgroundColor = UIColor(red: 104/255, green: 104/255, blue: 104/255, alpha: 1.0)
+        view.addSubview(label)
+        view.addSubview(separator)
+        
+        return view
     }
     
 //    override func viewDidAppear(_ animated: Bool) {
@@ -300,6 +338,10 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
         helpItems.append(timeItem)
         let importantItem = KSGuideItem(sourceView: importantLabel, text: "这里是你所有标记为重要的计划~")
         helpItems.append(importantItem)
+        let historyItem = KSGuideItem(sourceView: historyLabel, text: "回顾历史的长河,历史是生活的一面镜子;历史上的每一天,都是喜忧参半,历史是不能忘记的,历史上的今天,看看都发生了什么重大事件~")
+        helpItems.append(historyItem)
+        let achivementItem = KSGuideItem(sourceView: achivementLabel, text: "你获得的成就会显示在这里~")
+        helpItems.append(achivementItem)
         let vc = KSGuideController(items: helpItems, key: "SideBarGuide")
         vc.setIndexChangeBlock { (index, item) in
             print("Index has change to \(index)")

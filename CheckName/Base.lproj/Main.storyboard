@@ -690,10 +690,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="My Plan" id="7X3-Lf-dMQ">
+                            <tableViewSection id="7X3-Lf-dMQ">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="mgZ-od-wxH">
-                                        <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mgZ-od-wxH" id="5KV-g8-lEY">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -718,7 +718,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="zBQ-OK-HyW">
-                                        <rect key="frame" x="0.0" y="116" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="88" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zBQ-OK-HyW" id="VUD-Cc-T31">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -743,7 +743,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="lj1-Vw-IQc">
-                                        <rect key="frame" x="0.0" y="160" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="132" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lj1-Vw-IQc" id="fdv-z9-6eN">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -768,7 +768,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="wMo-lM-1lU">
-                                        <rect key="frame" x="0.0" y="204" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="176" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wMo-lM-1lU" id="57u-ep-AT7">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -794,10 +794,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Bingo" id="Jlo-aw-A1k">
+                            <tableViewSection id="Jlo-aw-A1k">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="M0a-aj-cib">
-                                        <rect key="frame" x="0.0" y="276" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="220" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="M0a-aj-cib" id="mLq-39-NeY">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -822,7 +822,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Zk5-xV-8nu">
-                                        <rect key="frame" x="0.0" y="320" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="264" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Zk5-xV-8nu" id="QYV-zu-0dI">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -852,6 +852,8 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="achivementLabel" destination="n6E-dy-vx9" id="ROW-uH-Lz0"/>
+                        <outlet property="historyLabel" destination="pcX-FX-CX9" id="pDh-Xm-cb6"/>
                         <outlet property="importantLabel" destination="igF-ov-ZWP" id="UCb-yf-Wf7"/>
                         <outlet property="quickLabel" destination="95z-60-IGz" id="Nqz-KM-0RH"/>
                         <outlet property="timeLabel" destination="ksj-ge-O6S" id="Mde-Aw-pGa"/>
