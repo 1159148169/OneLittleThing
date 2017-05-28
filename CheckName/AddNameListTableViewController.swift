@@ -26,6 +26,8 @@ struct PostNotificationName {
 
 class AddNameListTableViewController: UITableViewController,UITextFieldDelegate {
     
+    var archivementDataArray = [NSData]()
+    
     weak var delegate:AddItemViewControllerDelegate?
     
     var nameToEdit:NameItem?
@@ -186,16 +188,137 @@ class AddNameListTableViewController: UITableViewController,UITextFieldDelegate 
                 
                 
                 switch planDoneNum {
+                    
                 case 9:
+                    
+                    let archivement = Archivement()
+                    archivement.title = "初出茅庐"
+                    archivement.subTitle = "新建了10个计划后获得"
+                    archivement.picURL = ""
+//                    archivement.kind = 10010
+                    
+                    // 先从UserDefults中读取成就数据
+                    if UserDefaults.standard.array(forKey: "Archive") == nil {
+                        // 然后将新的成就数据添加到数组中
+                        let archivementData = NSKeyedArchiver.archivedData(withRootObject: archivement)
+                        self.archivementDataArray.append(archivementData as NSData)
+                        // 最后将新的数组存入UserDefults
+                        UserDefaults.standard.set(self.archivementDataArray, forKey: "Archive")
+                    } else {
+                        self.archivementDataArray = UserDefaults.standard.array(forKey: "Archive") as! [NSData]
+                        // 然后将新的成就数据添加到数组中
+                        let archivementData = NSKeyedArchiver.archivedData(withRootObject: archivement)
+                        self.archivementDataArray.append(archivementData as NSData)
+                        // 最后将新的数组存入UserDefults
+                        UserDefaults.standard.set(self.archivementDataArray, forKey: "Archive")
+                    }
+                    
                     NotificationCenter.default.post(name: PostNotificationName.Finish10Post, object: nil)
+                    
                 case 49:
+                    
+                    let archivement = Archivement()
+                    archivement.title = "小试牛刀"
+                    archivement.subTitle = "新建了50个计划后获得"
+                    archivement.picURL = ""
+//                    archivement.kind = 10050
+                    
+                    // 先从UserDefults中读取成就数据
+                    if UserDefaults.standard.array(forKey: "Archive") == nil {
+                        // 然后将新的成就数据添加到数组中
+                        let archivementData = NSKeyedArchiver.archivedData(withRootObject: archivement)
+                        self.archivementDataArray.append(archivementData as NSData)
+                        // 最后将新的数组存入UserDefults
+                        UserDefaults.standard.set(self.archivementDataArray, forKey: "Archive")
+                    } else {
+                        self.archivementDataArray = UserDefaults.standard.array(forKey: "Archive") as! [NSData]
+                        // 然后将新的成就数据添加到数组中
+                        let archivementData = NSKeyedArchiver.archivedData(withRootObject: archivement)
+                        self.archivementDataArray.append(archivementData as NSData)
+                        // 最后将新的数组存入UserDefults
+                        UserDefaults.standard.set(self.archivementDataArray, forKey: "Archive")
+                    }
+                    
                     NotificationCenter.default.post(name: PostNotificationName.Finish50Post, object: nil)
+                    
                 case 99:
+                    
+                    let archivement = Archivement()
+                    archivement.title = "记录达人"
+                    archivement.subTitle = "新建了100个计划后获得"
+                    archivement.picURL = ""
+//                    archivement.kind = 10100
+                    
+                    // 先从UserDefults中读取成就数据
+                    if UserDefaults.standard.array(forKey: "Archive") == nil {
+                        // 然后将新的成就数据添加到数组中
+                        let archivementData = NSKeyedArchiver.archivedData(withRootObject: archivement)
+                        self.archivementDataArray.append(archivementData as NSData)
+                        // 最后将新的数组存入UserDefults
+                        UserDefaults.standard.set(self.archivementDataArray, forKey: "Archive")
+                    } else {
+                        self.archivementDataArray = UserDefaults.standard.array(forKey: "Archive") as! [NSData]
+                        // 然后将新的成就数据添加到数组中
+                        let archivementData = NSKeyedArchiver.archivedData(withRootObject: archivement)
+                        self.archivementDataArray.append(archivementData as NSData)
+                        // 最后将新的数组存入UserDefults
+                        UserDefaults.standard.set(self.archivementDataArray, forKey: "Archive")
+                    }
+                    
                     NotificationCenter.default.post(name: PostNotificationName.Finish100Post, object: nil)
+                    
                 case 499:
+                    
+                    let archivement = Archivement()
+                    archivement.title = "排山倒海"
+                    archivement.subTitle = "新建了500个计划后获得"
+                    archivement.picURL = ""
+//                    archivement.kind = 10500
+                    
+                    // 先从UserDefults中读取成就数据
+                    if UserDefaults.standard.array(forKey: "Archive") == nil {
+                        // 然后将新的成就数据添加到数组中
+                        let archivementData = NSKeyedArchiver.archivedData(withRootObject: archivement)
+                        self.archivementDataArray.append(archivementData as NSData)
+                        // 最后将新的数组存入UserDefults
+                        UserDefaults.standard.set(self.archivementDataArray, forKey: "Archive")
+                    } else {
+                        self.archivementDataArray = UserDefaults.standard.array(forKey: "Archive") as! [NSData]
+                        // 然后将新的成就数据添加到数组中
+                        let archivementData = NSKeyedArchiver.archivedData(withRootObject: archivement)
+                        self.archivementDataArray.append(archivementData as NSData)
+                        // 最后将新的数组存入UserDefults
+                        UserDefaults.standard.set(self.archivementDataArray, forKey: "Archive")
+                    }
+                    
                     NotificationCenter.default.post(name: PostNotificationName.Finish500Post, object: nil)
+                    
                 case 999:
+                    
+                    let archivement = Archivement()
+                    archivement.title = "6666"
+                    archivement.subTitle = "新建了1000个计划后获得"
+                    archivement.picURL = ""
+//                    archivement.kind = 11000
+                    
+                    // 先从UserDefults中读取成就数据
+                    if UserDefaults.standard.array(forKey: "Archive") == nil {
+                        // 然后将新的成就数据添加到数组中
+                        let archivementData = NSKeyedArchiver.archivedData(withRootObject: archivement)
+                        self.archivementDataArray.append(archivementData as NSData)
+                        // 最后将新的数组存入UserDefults
+                        UserDefaults.standard.set(self.archivementDataArray, forKey: "Archive")
+                    } else {
+                        self.archivementDataArray = UserDefaults.standard.array(forKey: "Archive") as! [NSData]
+                        // 然后将新的成就数据添加到数组中
+                        let archivementData = NSKeyedArchiver.archivedData(withRootObject: archivement)
+                        self.archivementDataArray.append(archivementData as NSData)
+                        // 最后将新的数组存入UserDefults
+                        UserDefaults.standard.set(self.archivementDataArray, forKey: "Archive")
+                    }
+                    
                     NotificationCenter.default.post(name: PostNotificationName.Finish1000Post, object: nil)
+                    
                 default:
                     break
                 }

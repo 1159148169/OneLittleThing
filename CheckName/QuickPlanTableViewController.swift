@@ -12,6 +12,8 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
+    var archivementDataArray = [NSData]()
+    
     var allType: [TypeListItem] //快速计划种类
     var quick: TypeListItem
     var count = 0
@@ -172,6 +174,154 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
                 item.toggleCharge()
                 self.configureCheckmark(for: cell, at: indexPath)
                 tableView.reloadData()
+                
+                let planFinishedNum = UserDefaults.standard.integer(forKey: "PlanAllFinishedNum")
+                UserDefaults.standard.set(planFinishedNum + 1, forKey: "PlanAllFinishedNum") // 从0开始
+                
+                switch planFinishedNum {
+                    
+                case 9:
+                    let archivement = Archivement()
+                    archivement.title = "经验宝宝"
+                    archivement.subTitle = "完成了10个计划后获得"
+                    archivement.picURL = ""
+//                    archivement.kind = 20010
+                    
+                    // 先从UserDefults中读取成就数据
+                    if UserDefaults.standard.array(forKey: "Archive") == nil {
+                        // 然后将新的成就数据添加到数组中
+                        let archivementData = NSKeyedArchiver.archivedData(withRootObject: archivement)
+                        self.archivementDataArray.append(archivementData as NSData)
+                        // 最后将新的数组存入UserDefults
+                        UserDefaults.standard.set(self.archivementDataArray, forKey: "Archive")
+                    } else {
+                        self.archivementDataArray = UserDefaults.standard.array(forKey: "Archive") as! [NSData]
+                        // 然后将新的成就数据添加到数组中
+                        let archivementData = NSKeyedArchiver.archivedData(withRootObject: archivement)
+                        self.archivementDataArray.append(archivementData as NSData)
+                        // 最后将新的数组存入UserDefults
+                        UserDefaults.standard.set(self.archivementDataArray, forKey: "Archive")
+                    }
+                    
+                    let alert = UIAlertController(title: "很棒", message: "你已经完成了10个计划,并且获得了\"经验宝宝\"勋章!现在你可以在\"我的成就\"列表中查看你的成就!", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "好", style: .default, handler: nil)
+                    alert.addAction(action)
+                    self.present(alert, animated: true, completion: nil)
+                    
+                case 49:
+                    let archivement = Archivement()
+                    archivement.title = "浪里个浪"
+                    archivement.subTitle = "完成了50个计划后获得"
+                    archivement.picURL = ""
+//                    archivement.kind = 20050
+                    
+                    // 先从UserDefults中读取成就数据
+                    if UserDefaults.standard.array(forKey: "Archive") == nil {
+                        // 然后将新的成就数据添加到数组中
+                        let archivementData = NSKeyedArchiver.archivedData(withRootObject: archivement)
+                        self.archivementDataArray.append(archivementData as NSData)
+                        // 最后将新的数组存入UserDefults
+                        UserDefaults.standard.set(self.archivementDataArray, forKey: "Archive")
+                    } else {
+                        self.archivementDataArray = UserDefaults.standard.array(forKey: "Archive") as! [NSData]
+                        // 然后将新的成就数据添加到数组中
+                        let archivementData = NSKeyedArchiver.archivedData(withRootObject: archivement)
+                        self.archivementDataArray.append(archivementData as NSData)
+                        // 最后将新的数组存入UserDefults
+                        UserDefaults.standard.set(self.archivementDataArray, forKey: "Archive")
+                    }
+                    
+                    let alert = UIAlertController(title: "很棒", message: "你已经完成了50个计划,并且获得了\"浪里个浪\"勋章!现在你可以在\"我的成就\"列表中查看你的成就!", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "好", style: .default, handler: nil)
+                    alert.addAction(action)
+                    self.present(alert, animated: true, completion: nil)
+                    
+                case 99:
+                    let archivement = Archivement()
+                    archivement.title = "计划达人"
+                    archivement.subTitle = "完成了100个计划后获得"
+                    archivement.picURL = ""
+//                    archivement.kind = 20100
+                    
+                    // 先从UserDefults中读取成就数据
+                    if UserDefaults.standard.array(forKey: "Archive") == nil {
+                        // 然后将新的成就数据添加到数组中
+                        let archivementData = NSKeyedArchiver.archivedData(withRootObject: archivement)
+                        self.archivementDataArray.append(archivementData as NSData)
+                        // 最后将新的数组存入UserDefults
+                        UserDefaults.standard.set(self.archivementDataArray, forKey: "Archive")
+                    } else {
+                        self.archivementDataArray = UserDefaults.standard.array(forKey: "Archive") as! [NSData]
+                        // 然后将新的成就数据添加到数组中
+                        let archivementData = NSKeyedArchiver.archivedData(withRootObject: archivement)
+                        self.archivementDataArray.append(archivementData as NSData)
+                        // 最后将新的数组存入UserDefults
+                        UserDefaults.standard.set(self.archivementDataArray, forKey: "Archive")
+                    }
+                    
+                    let alert = UIAlertController(title: "很棒", message: "你已经完成了100个计划,并且获得了\"计划达人\"勋章!现在你可以在\"我的成就\"列表中查看你的成就!", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "好", style: .default, handler: nil)
+                    alert.addAction(action)
+                    self.present(alert, animated: true, completion: nil)
+                    
+                case 499:
+                    let archivement = Archivement()
+                    archivement.title = "走火入魔"
+                    archivement.subTitle = "完成了500个计划后获得"
+                    archivement.picURL = ""
+//                    archivement.kind = 20500
+                    
+                    // 先从UserDefults中读取成就数据
+                    if UserDefaults.standard.array(forKey: "Archive") == nil {
+                        // 然后将新的成就数据添加到数组中
+                        let archivementData = NSKeyedArchiver.archivedData(withRootObject: archivement)
+                        self.archivementDataArray.append(archivementData as NSData)
+                        // 最后将新的数组存入UserDefults
+                        UserDefaults.standard.set(self.archivementDataArray, forKey: "Archive")
+                    } else {
+                        self.archivementDataArray = UserDefaults.standard.array(forKey: "Archive") as! [NSData]
+                        // 然后将新的成就数据添加到数组中
+                        let archivementData = NSKeyedArchiver.archivedData(withRootObject: archivement)
+                        self.archivementDataArray.append(archivementData as NSData)
+                        // 最后将新的数组存入UserDefults
+                        UserDefaults.standard.set(self.archivementDataArray, forKey: "Archive")
+                    }
+                    
+                    let alert = UIAlertController(title: "哇塞", message: "你已经完成了500个计划,并且获得了\"走火入魔\"勋章!Amazing!现在你可以在\"我的成就\"列表中查看你的成就!", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "好", style: .default, handler: nil)
+                    alert.addAction(action)
+                    self.present(alert, animated: true, completion: nil)
+                    
+                case 999:
+                    let archivement = Archivement()
+                    archivement.title = "6得不行"
+                    archivement.subTitle = "完成了1000个计划后获得"
+                    archivement.picURL = ""
+//                    archivement.kind = 21000
+                    
+                    // 先从UserDefults中读取成就数据
+                    if UserDefaults.standard.array(forKey: "Archive") == nil {
+                        // 然后将新的成就数据添加到数组中
+                        let archivementData = NSKeyedArchiver.archivedData(withRootObject: archivement)
+                        self.archivementDataArray.append(archivementData as NSData)
+                        // 最后将新的数组存入UserDefults
+                        UserDefaults.standard.set(self.archivementDataArray, forKey: "Archive")
+                    } else {
+                        self.archivementDataArray = UserDefaults.standard.array(forKey: "Archive") as! [NSData]
+                        // 然后将新的成就数据添加到数组中
+                        let archivementData = NSKeyedArchiver.archivedData(withRootObject: archivement)
+                        self.archivementDataArray.append(archivementData as NSData)
+                        // 最后将新的数组存入UserDefults
+                        UserDefaults.standard.set(self.archivementDataArray, forKey: "Archive")
+                    }
+                    
+                    let alert = UIAlertController(title: "天啊", message: "你已经完成了1000个计划!这枚\"6得不行\"勋章是你的了!简直不敢相信!现在你可以在\"我的成就\"列表中查看你的成就!", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "好", style: .default, handler: nil)
+                    alert.addAction(action)
+                    self.present(alert, animated: true, completion: nil)
+                default:
+                    break
+                }
                 
                 return true
             })]
