@@ -27,7 +27,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         
         UIApplication.shared.statusBarStyle = .lightContent //更改状态栏颜色来和导航栏字体颜色适配,在info里做过修改
         
+        //极光推送
+        //通知类型（这里将声音、消息、提醒角标都给加上）
+        let userSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+        if ((UIDevice.current.systemVersion as NSString).floatValue >= 8.0) {
+            //可以添加自定义categories
+            JPUSHService.register(forRemoteNotificationTypes: userSettings.types.rawValue,
+                                  categories: nil)
+        }
+        else {
+            //categories 必须为nil
+            JPUSHService.register(forRemoteNotificationTypes: userSettings.types.rawValue,
+                                  categories: nil)
+        }
+        
+        // 启动JPushSDK
+        JPUSHService.setup(withOption: nil, appKey: "8558fce51ccc13746a837f98",
+                           channel: "Publish Channel", apsForProduction: false)
+        
         return true
+    }
+    
+    func application(_ application: UIApplication,
+                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        //注册 DeviceToken
+        JPUSHService.registerDeviceToken(deviceToken)
+    }
+    
+    func application(_ application: UIApplication,
+                     didReceiveRemoteNotification userInfo: [AnyHashable : Any],
+                     fetchCompletionHandler
+        completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        //增加IOS 7的支持
+        JPUSHService.handleRemoteNotification(userInfo)
+        completionHandler(UIBackgroundFetchResult.newData)
+    }
+    
+    func application(_ application: UIApplication,
+                     didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        //可选
+        NSLog("did Fail To Register For Remote Notifications With Error: \(error)")
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
