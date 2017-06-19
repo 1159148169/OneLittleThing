@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import SwiftyJSON
 
 class SideBarController: UITableViewController,CLLocationManagerDelegate {
     
@@ -19,12 +20,16 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
     @IBOutlet weak var historyLabel: UILabel!
     @IBOutlet weak var achivementLabel: UILabel!
     
+    var city = ""
+    var weather = ""
+    var tem = ""
+    
     var helpItems = [KSGuideItem]()
     
     var dataTask: URLSessionTask?
     var totalWetherString: String?
-    var searchResult: [String: String]!
-    var locationString: String = "error"
+    var searchResult: [String: Any]!
+    var locationString: String = ""
     
     let successGetLocation = Notification.Name(rawValue: "getLocationSuccess")
     
@@ -77,37 +82,39 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
                 stopLocation()
                 
             }
-            if !performingReverseGeocoding {
-                print("Going to geocode!")
-                
-                performingReverseGeocoding = true
-                geocoder.reverseGeocodeLocation(lastLocation, completionHandler: {
-                    placemarks, error in //闭包里的代码不会马上执行，闭包保留以供以后由CLGeocoder对象使用，并且只有在CLGeocoder找到地址或遇到错误后才执行
-                    
-                    print("Found Placemarks \(String(describing: placemarks)) error \(String(describing: error))")
-                    
-                    self.lastGeocodingError = error
-                    if error == nil,let p = placemarks,!p.isEmpty { // 这样的写法表示placemarks是可选值，需要解包再使用，!p.isEmpty表示如果placemarks数组不为空，就应该只输入此if语句，这句可以这么理解：如果没有错误，并且解包的地标数组不为空
-                        self.placemark = p.last!
-                    } else {
-                        self.placemark = nil
-                    }
-                    
-                    self.performingReverseGeocoding = false
-                    
-                    self.location = nil // 临时解决办法
-                    
-                    print("详细地址: \(self.placemark!.administrativeArea!)")
-                    
-                    if self.placemark!.administrativeArea != nil {
-                        self.locationString = self.convertAdtressString(with: self.placemark!.administrativeArea!)
-                        NotificationCenter.default.post(name: self.successGetLocation, object: nil)
-                    } else {
-                        self.locationString = "error"
-                    }
-                    
-                })
-            }
+            
+            NotificationCenter.default.post(name: self.successGetLocation, object: nil)
+//            if !performingReverseGeocoding {
+//                print("Going to geocode!")
+//                
+//                performingReverseGeocoding = true
+//                geocoder.reverseGeocodeLocation(lastLocation, completionHandler: {
+//                    placemarks, error in //闭包里的代码不会马上执行，闭包保留以供以后由CLGeocoder对象使用，并且只有在CLGeocoder找到地址或遇到错误后才执行
+//                    
+//                    print("Found Placemarks \(String(describing: placemarks)) error \(String(describing: error))")
+//                    
+//                    self.lastGeocodingError = error
+//                    if error == nil,let p = placemarks,!p.isEmpty { // 这样的写法表示placemarks是可选值，需要解包再使用，!p.isEmpty表示如果placemarks数组不为空，就应该只输入此if语句，这句可以这么理解：如果没有错误，并且解包的地标数组不为空
+//                        self.placemark = p.last!
+//                    } else {
+//                        self.placemark = nil
+//                    }
+//                    
+//                    self.performingReverseGeocoding = false
+//                    
+//                    self.location = nil // 临时解决办法
+//                    
+//                    print("详细地址: \(self.placemark!.administrativeArea!)")
+//                    
+//                    if self.placemark!.administrativeArea != nil {
+//                        self.locationString = self.convertAdtressString(with: self.placemark!.administrativeArea!)
+//                        NotificationCenter.default.post(name: self.successGetLocation, object: nil)
+//                    } else {
+//                        self.locationString = "error"
+//                    }
+//                    
+//                })
+//            }
         }
     }
     
@@ -175,12 +182,13 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
         NotificationCenter.default.addObserver(forName: successGetLocation, object: nil, queue: OperationQueue.main) { (Notification) in
             
             let url: URL
-            if self.locationString == "error" {
+            if self.location == nil {
                 url = URL(string: "https://error")!
             } else {
-                url = URL(string: "https://chat.crazyc.cn/weather/" + "\(self.locationString)")!
+                url = URL(string: "https://api.seniverse.com/v3/weather/now.json?key=md5qkak6jj0czqxa&location=\(self.location!.coordinate.latitude):\(self.location!.coordinate.longitude)&language=zh-Hans&unit=c")!
+                print("URL: \(url)")
             }
-            print("locationString: \(self.locationString)")
+//            print("locationString: \(self.locationString)")
             let session = URLSession.shared
             self.dataTask = session.dataTask(with: url, completionHandler: { (data, response, error) in
                 
@@ -194,10 +202,14 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
                     self.searchResult = self.parse(json: data!)
                     
                     print("搜索结果: \(self.searchResult)")
-                    print(self.searchResult!["today_situation"]!)
+                    let json = JSON.init(self.searchResult)
+                    print(json)
+                    self.city = json["results"][0]["location"]["name"].string!
+                    self.weather = json["results"][0]["now"]["text"].string!
+                    self.tem = json["results"][0]["now"]["temperature"].string!
                     
                     DispatchQueue.main.async {
-                        self.weatherLabel.text = "今日天气:" + "  " +  self.searchResult["today_temperature"]! + "  " + self.searchResult["today_situation"]!
+                        self.weatherLabel.text = "今日天气:" + "  " +  self.city + "  " + self.weather + "  " + self.tem + "  " + "℃"
                     }
                 }
                 
@@ -215,6 +227,7 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         
+        self.location = nil // 临时解决办法
         stopLocation()
         dataTask?.cancel()
         
@@ -278,10 +291,10 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func parse(json data: Data) -> [String: String]? {
+    func parse(json data: Data) -> [String: Any]? {
         
         do {
-            return try JSONSerialization.jsonObject(with: data, options: []) as? [String: String] // 使用JSONSerialization对象将json数据转换为字典数据
+            return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] // 使用JSONSerialization对象将json数据转换为字典数据
         } catch {
             print("json错误:\(error)")
             return nil

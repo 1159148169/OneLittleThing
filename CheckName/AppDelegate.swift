@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool { //这个方法允许你在显示app给用户之前执行最后的初始化操作
+//        UIApplication.shared.applicationIconBadgeNumber = 0
         let centre = UNUserNotificationCenter.current() //为了实现UNUserNotificationCenterDelegate协议对应的方法
         centre.delegate = self
         
@@ -28,8 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         UIApplication.shared.statusBarStyle = .lightContent //更改状态栏颜色来和导航栏字体颜色适配,在info里做过修改
         
         //极光推送
-        //通知类型（这里将声音、消息、提醒角标都给加上）
-        let userSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+        //通知类型（这里将声音、消息给加上，提醒小标暂时不加）
+        let userSettings = UIUserNotificationSettings(types: [.alert, .sound], categories: nil)
         if ((UIDevice.current.systemVersion as NSString).floatValue >= 8.0) {
             //可以添加自定义categories
             JPUSHService.register(forRemoteNotificationTypes: userSettings.types.rawValue,
