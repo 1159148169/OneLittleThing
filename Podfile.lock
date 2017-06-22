@@ -1,15 +1,21 @@
 PODS:
+  - AVOSCloud (4.2.0)
   - DZNEmptyDataSet (1.8.1)
+  - LeanCloudFeedback (0.1.1):
+    - AVOSCloud
   - MGSwipeTableCell (1.5.6)
 
 DEPENDENCIES:
   - DZNEmptyDataSet (~> 1.8)
+  - LeanCloudFeedback
   - MGSwipeTableCell (~> 1.5.6)
 
 SPEC CHECKSUMS:
+  AVOSCloud: 5446ad0320f4942cce1a036d131992cd1115db99
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
+  LeanCloudFeedback: 686305ea196931c7eae49800c384e42d78408482
   MGSwipeTableCell: 616700eb0ffd1c611ba909066cb7fd739790a0a7
 
-PODFILE CHECKSUM: b37294830eba2f1ede81726a896bc36a260a3ef7
+PODFILE CHECKSUM: d57904a0abbe4d6be4fce98ea2612fce9b00aad9
 
 COCOAPODS: 1.1.1

@@ -4,7 +4,17 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AVOSCloud.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>DZNEmptyDataSet.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>LeanCloudFeedback.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -22,6 +32,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>28AFBC0E511B8F40FE4F8AB64E3F6F22</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>43AFBF4F2CD231A7499E3B7813A16837</key>
 		<dict>
 			<key>primary</key>
@@ -32,7 +47,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B7AB5FF76C03EE0F735438B4B4758FFB</key>
+		<key>55C2BE861257CD0EFBD26991FBF928E4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A40FD10582462E4B7E3F0FD7865B3551</key>
 		<dict>
 			<key>primary</key>
 			<true/>
