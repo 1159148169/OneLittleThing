@@ -15,35 +15,6 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
     
     /*required init?(coder aDcoder: NSCoder) { //在类的构造器前添加required修饰符表明所有该类的子类都必须实现该构造器,重写父类中必要的制定构造器时不需要添加override修饰符
      //如果子类继承的构造器能满足必要构造器的要求,则无须在子类中显式提供必要构造器的实现
-     typeNames.items = [NameItem]()
-     
-     /*let item0 = NameItem()
-     item0.name = "TangJian"
-     item0.charge = false
-     items.append(item0)
-     
-     let item1 = NameItem()
-     item1.name = "ShiFeng"
-     item1.charge = false
-     items.append(item1)
-     
-     let item2 = NameItem()
-     item2.name = "WangShuai"
-     item2.charge = false
-     items.append(item2)
-     
-     let item3 = NameItem()
-     item3.name = "WangKai"
-     item3.charge = false
-     items.append(item3)
-     
-     let item4 = NameItem()
-     item4.name = "LiJiesheng"
-     item4.charge = false
-     items.append(item4)*/
-     super.init(coder: aDcoder)
-     
-     //loadChecklistItems()
      }*/
     
     override func viewDidLoad() {
@@ -63,26 +34,7 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
-    
-    
-    //    override func numberOfSections(in tableView: UITableView) -> Int {
-    //        return 2
-    //    }
-    //    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    //
-    //        let date = typeNames.items[section].nowDate
-    //        let formatter = DateFormatter()
-    //        formatter.dateStyle = .medium
-    //        formatter.timeStyle = .short
-    //        let nowTimeFormatter = DateFormatter()
-    //        nowTimeFormatter.dateFormat = "MM月dd日"
-    //        return nowTimeFormatter.string(from: date)
-    //
-    //    }
-    
-    
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return typeNames.items.count
     }
@@ -127,29 +79,18 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
         
         
         
-        
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .short
         
         let nowTimeFormatter = DateFormatter()
         nowTimeFormatter.dateFormat = "MM月dd日"
-        //        nowTimeFormatter.dateStyle = .short
-        //        nowTimeFormatter.timeStyle = .none
-        //        print(item.nowDate)
-        //        print(nowTimeFormatter.string(from: item.nowDate))
         nowTimeLabel.text = nowTimeFormatter.string(from: item.nowDate)
         
         if item.shouldImportant == true {
-            //            label.textColor = UIColor.red
-            //            importantLabel.textColor = UIColor.red
             importantLabel.attributedText = NSAttributedString(string: "这个计划很重要!", attributes: rememberAndImportantAttributes)
-            //            remindTimeLabel.textColor = UIColor.red
         } else {
-            //            label.textColor = UIColor.black
-            //            importantLabel.textColor = UIColor.darkGray
             importantLabel.attributedText = NSAttributedString(string: "合理规划并管理你的生活", attributes: rememberAndImportantAttributes)
-            //            remindTimeLabel.textColor = UIColor.darkGray
         }
         if item.shouldRemind == true {
             remindTimeLabel.attributedText = NSAttributedString(string: "\(formatter.string(from: item.dueDate)) 前完成", attributes: rememberAndImportantAttributes)
@@ -162,16 +103,6 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
         } else {
             item.scheduleNotification()
         }
-        
-        /*if item.charge == true {
-         //如果计划完成就添加删除线
-         let attribtStr = NSMutableAttributedString(string: item.name)
-         attribtStr.addAttribute(NSStrikethroughStyleAttributeName, value: NSNumber(value: 1), range: NSMakeRange(0, 3))
-         label.attributedText = attribtStr
-         label.sizeToFit()
-         
-         self.view.addSubview(label)
-         }*/
         
         configureCheckmark(for: cell, at: indexPath)
         
@@ -493,7 +424,6 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
         tableView.insertRows(at: indexPaths, with: .automatic)
         
         dismiss(animated: true, completion: nil)
-        //saveChecklistItems()
         tableView.reloadData()
     }
     
@@ -505,34 +435,9 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
                 label.text = item.name
             }
         }
-        //saveChecklistItems()
         dismiss(animated: true, completion: nil)
         tableView.reloadData()
     }
-    
-    //保存和读取
-    /*func documentsDirectory() -> URL {
-     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-     return paths[0]
-     }
-     func dataFilePath() -> URL {
-     return documentsDirectory().appendingPathComponent("Checklists.plist")
-     }
-     func saveChecklistItems() {
-     let data = NSMutableData()
-     let archiver = NSKeyedArchiver(forWritingWith: data)
-     archiver.encode(typeNames.items, forKey: "ChecklistItems")
-     archiver.finishEncoding()
-     data.write(to: dataFilePath(), atomically: true)
-     }
-     func loadChecklistItems() {
-     let path = dataFilePath()
-     if let data = try? Data(contentsOf: path) {
-     let unarchiver = NSKeyedUnarchiver(forReadingWith: data)
-     typeNames.items = unarchiver.decodeObject(forKey: "ChecklistItems") as! [NameItem]
-     unarchiver.finishDecoding()
-     }
-     }*/
     
     //实现第三方库协议的方法
     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {

@@ -354,10 +354,6 @@ class AddNameListTableViewController: UITableViewController,UITextFieldDelegate 
      self.tableView.endEditing(true)
      }*/
     
-    /*override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? { //此行代码作用未知,需要再研究
-     return nil
-     }*/
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 1 && indexPath.row == 3 {
@@ -393,10 +389,6 @@ class AddNameListTableViewController: UITableViewController,UITextFieldDelegate 
     }
     
     func showDatePicker() {
-        //datePickerVisible = true
-        //let indexPathDatePicker = IndexPath(row: 2, section: 1)
-        //tableView.insertRows(at: [indexPathDatePicker], with: .fade)
-        
         let picker = DateTimePicker.show()
         picker.highlightColor = UIColor(red: 255.0/255.0, green: 138.0/255.0, blue: 138.0/255.0, alpha: 1)
         picker.completionHandler = { date in

@@ -20,24 +20,6 @@ class SuperNameTableViewController: UITableViewController,AddNewListTypeDelegate
     
     required init?(coder aDcoder: NSCoder) {
         lists = [TypeListItem]()
-        /*let item0 = TypeListItem(name: "Study") //必须自己定义一个构造器
-         lists.append(item0)
-         
-         let item1 = TypeListItem(name: "Sports")
-         lists.append(item1)
-         
-         let item2 = TypeListItem(name: "Works")
-         lists.append(item2)
-         
-         let item3 = TypeListItem(name: "Life")
-         lists.append(item3)
-         
-         let item4 = TypeListItem(name: "Buy")
-         lists.append(item4)
-         
-         let item5 = TypeListItem(name: "Others")
-         lists.append(item5)*/
-        
         super.init(coder: aDcoder)
         loadChecklist()
         //以下循环用来测试
@@ -54,14 +36,6 @@ class SuperNameTableViewController: UITableViewController,AddNewListTypeDelegate
         self.revealViewController().tapGestureRecognizer()
         self.tableView.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
-        //        let panGestureRecognizer = UITapGestureRecognizer(target: self.revealViewController, action: #selector(SWRevealViewController.revealToggle(_:)))
-        //        self.tableView.addGestureRecognizer(panGestureRecognizer)
-        
-        //判断屏幕是否支持3d touch
-        /*if traitCollection.forceTouchCapability == .available {
-         registerForPreviewing(with: self, sourceView: tableView) //这里的sourceView指的是触发peek动作的view
-         }*/
-        
         if self.revealViewController() != nil {
             menuButton.target = self.revealViewController()
             menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
@@ -75,9 +49,6 @@ class SuperNameTableViewController: UITableViewController,AddNewListTypeDelegate
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none //去除cell之间的分割线
         
         self.tableView.rowHeight = 100 //改变row高度
-        
-        //self.tableView.animateCells(animation: .left(duration: 1))
-        //self.tableView.reloadData()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -107,16 +78,12 @@ class SuperNameTableViewController: UITableViewController,AddNewListTypeDelegate
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> TypeTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SuperNameListCell", for: indexPath) as! TypeTableViewCell
         
-        //        //获取每一个cell之后,把cell注册给控制器,这样我们才可以在重按的时候显示Peek视图
-        //        self.registerForPreviewing(with: self, sourceView: cell) //使用控制器调用方法,注册previewAction的代理和视图
-        
         let listTypeLabel = cell.viewWithTag(2000) as! UILabel
         let remainNumLabel = cell.viewWithTag(2001) as! UILabel
         
         let item = lists[indexPath.row]
         let finishNum = item.countItemChecked()
         listTypeLabel.text = item.name
-//        cell.backgroundView = item.typeImageView
         cell.imgBack.image = item.typeImage
         
         if item.items.count == 0 {
@@ -155,30 +122,6 @@ class SuperNameTableViewController: UITableViewController,AddNewListTypeDelegate
         
         return cell
     }
-    
-    //MARK: - 视差列表
-//    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if (scrollView == self.tableView) {
-//            for indexPath in self.tableView.indexPathsForVisibleRows! {
-//                self.setCellImageOffset(self.tableView.cellForRow(at: indexPath) as! TypeTableViewCell, indexPath: indexPath as NSIndexPath)
-//            }
-//        }
-//    }
-//    
-//    func setCellImageOffset(_ cell: TypeTableViewCell, indexPath: NSIndexPath) {
-//        let cellFrame = self.tableView.rectForRow(at: indexPath as IndexPath)
-//        let cellFrameInTable = self.tableView.convert(cellFrame, to:self.tableView.superview)
-//        let cellOffset = cellFrameInTable.origin.y + cellFrameInTable.size.height
-//        let tableHeight = self.tableView.bounds.size.height + cellFrameInTable.size.height
-//        let cellOffsetFactor = cellOffset / tableHeight
-//        cell.setBackgroundOffset(cellOffsetFactor)
-//    }
-//    
-//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        let imageCell = cell as! TypeTableViewCell
-//        self.setCellImageOffset(imageCell, indexPath: indexPath as NSIndexPath)
-//    }
-    
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let typeNames = lists[indexPath.row]
@@ -319,18 +262,5 @@ class SuperNameTableViewController: UITableViewController,AddNewListTypeDelegate
     }
     func emptyDataSetShouldAnimateImageView(_ scrollView: UIScrollView!) -> Bool {
         return false
-    }
-    
-    //    //实现peek和pop
-    //    //peek
-    //    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-    //
-    //        //建立新的控制器
-    //
-    //        return nil
-    //    }
-    //    //pop
-    //    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-    //    }
-    
+    }    
 }

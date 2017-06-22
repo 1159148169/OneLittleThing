@@ -11,10 +11,8 @@
 
 #import "UIScrollView+EmptyDataSet.h"
 #import "SWRevealViewController.h"
-
 #import "MGSwipeTableCell.h"
 #import "MGSwipeButton.h"
-
 #import "JPUSHService.h"
 
 #endif /* CheckName_Bridging_Header_h */

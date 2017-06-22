@@ -35,11 +35,6 @@ class HistoryOnTodayTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(true)
-//        self.tableView.animateCells(animation: .left(duration: 1))
-//    }
 
     // MARK: - Table view data source
 

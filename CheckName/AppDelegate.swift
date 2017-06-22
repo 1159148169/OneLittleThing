@@ -19,9 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         let centre = UNUserNotificationCenter.current() //为了实现UNUserNotificationCenterDelegate协议对应的方法
         centre.delegate = self
         
-        //        if let barFont = UIFont(name: "AvenirNext", size: 25.0) {
-        //            UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white, NSFontAttributeName:barFont]
-        //        } //更改导航栏字体样式
         UINavigationBar.appearance().barTintColor =  UIColor.black //修改导航栏背景色
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white] //修改导航栏文字颜色
         UINavigationBar.appearance().tintColor = UIColor.white //修改导航栏按钮颜色
@@ -100,8 +97,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     }
     
     func saveData() {
-        //        let navigationController = window!.rootViewController as! UINavigationController
-        //        let controller = navigationController.viewControllers[0] as! SuperNameTableViewController
         let controllerStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let navigationController = controllerStoryboard.instantiateViewController(withIdentifier: "TypeNavigation") as! UINavigationController
         print(navigationController.restorationIdentifier!)
@@ -109,5 +104,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         print(controller.restorationIdentifier!)
         controller.saveChecklist()
     }
-    
 }

@@ -49,12 +49,6 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
         self.tableView.emptyDataSetDelegate = self
         self.tableView.tableFooterView = UIView()
         self.tableView.rowHeight = 100 //改变row高度
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     override func didReceiveMemoryWarning() {
@@ -125,15 +119,9 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
         nowTimeLabel.text = nowTimeFormatter.string(from: item.nowDate)
         
         if item.shouldImportant == true {
-            //            label.textColor = UIColor.red
-            //            importantLabel.textColor = UIColor.red
             importantLabel.attributedText = NSAttributedString(string: "这个计划很重要!", attributes: rememberAndImportantAttributes)
-            //            remindTimeLabel.textColor = UIColor.red
         } else {
-            //            label.textColor = UIColor.black
-            //            importantLabel.textColor = UIColor.darkGray
             importantLabel.attributedText = NSAttributedString(string: "合理规划并管理你的生活", attributes: rememberAndImportantAttributes)
-            //            remindTimeLabel.textColor = UIColor.darkGray
         }
         if item.shouldRemind == true {
             remindTimeLabel.attributedText = NSAttributedString(string: "\(formatter.string(from: item.dueDate)) 前完成", attributes: rememberAndImportantAttributes)

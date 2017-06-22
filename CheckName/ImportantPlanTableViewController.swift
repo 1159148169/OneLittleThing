@@ -42,12 +42,6 @@ class ImportantPlanTableViewController: UITableViewController,DZNEmptyDataSetSou
         self.tableView.emptyDataSetDelegate = self
         self.tableView.tableFooterView = UIView()
         self.tableView.rowHeight = 100 //改变row高度
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -132,15 +126,9 @@ class ImportantPlanTableViewController: UITableViewController,DZNEmptyDataSetSou
         nowTimeLabel.text = nowTimeFormatter.string(from: item.nowDate)
         
         if item.shouldImportant == true {
-//            timePlanLabel.textColor = UIColor.red
-//            importantLabel.textColor = UIColor.red
             importantLabel.attributedText = NSAttributedString(string: "这个计划很重要!", attributes: rememberAndImportantAttributes)
-//            remainTimeLabel.textColor = UIColor.red
         } else {
-//            timePlanLabel.textColor = UIColor.black
-//            importantLabel.textColor = UIColor.darkGray
             importantLabel.attributedText = NSAttributedString(string: "合理规划并管理你的生活", attributes: rememberAndImportantAttributes)
-//            remainTimeLabel.textColor = UIColor.darkGray
         }
         if item.shouldRemind == true {
             remainTimeLabel.attributedText = NSAttributedString(string: "\(formatter.string(from: item.dueDate)) 前完成", attributes: rememberAndImportantAttributes)
