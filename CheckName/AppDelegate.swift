@@ -25,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         
         UIApplication.shared.statusBarStyle = .lightContent //更改状态栏颜色来和导航栏字体颜色适配,在info里做过修改
         
+        //注册LeanCloud服务
+        AVOSCloud.setApplicationId("CGM6nl02YaWaB2YzzrOjOwBf-gzGzoHsz" ,clientKey: "sHsacdDcvHSLsW6uKY4d4te9")
+        
         //极光推送
         //通知类型（这里将声音、消息给加上，提醒小标暂时不加）
         let userSettings = UIUserNotificationSettings(types: [.alert, .sound], categories: nil)

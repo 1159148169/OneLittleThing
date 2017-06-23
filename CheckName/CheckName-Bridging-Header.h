@@ -15,5 +15,6 @@
 #import "MGSwipeButton.h"
 #import "JPUSHService.h"
 #import "LeanCloudFeedback.h"
+#import "AVOSCloud.h"
 
 #endif /* CheckName_Bridging_Header_h */

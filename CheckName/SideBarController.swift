@@ -116,6 +116,10 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.sectionHeaderHeight = 28
+        let setButton = UIButton(frame: CGRect(x: 180, y: 570, width: 60, height: 60))
+        setButton.setBackgroundImage(UIImage(named: "设置"), for: .normal)
+        setButton.addTarget(self, action: #selector(touchSet), for: .touchUpInside)
+        self.tableView.addSubview(setButton)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -225,6 +229,13 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
             print("json错误:\(error)")
             return nil
         }
+    }
+    
+    // 点击设置
+    func touchSet() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let setNavigation = storyboard.instantiateViewController(withIdentifier: "Set") as! UINavigationController
+        self.present(setNavigation, animated: true, completion: nil)
     }
     
     // 展示引导页
