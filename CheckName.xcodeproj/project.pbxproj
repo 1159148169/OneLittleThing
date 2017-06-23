@@ -640,7 +640,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CheckName/CheckName.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Shi Feng (4GJL5CG77A)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 4GJL5CG77A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -655,8 +655,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shifeng.onelittlething;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7a62d4fc-f091-4433-8887-5b46513d8ecd";
-				PROVISIONING_PROFILE_SPECIFIER = "小事一桩0618";
+				PROVISIONING_PROFILE = "2547a18e-52d2-418f-ac41-31acae888de4";
+				PROVISIONING_PROFILE_SPECIFIER = OneLittleThingTest0623;
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/shifeng/Desktop/OneLittleThing/CheckName/CheckName-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -670,7 +670,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CheckName/CheckName.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Shi Feng (4GJL5CG77A)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 4GJL5CG77A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -685,8 +685,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shifeng.onelittlething;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7a62d4fc-f091-4433-8887-5b46513d8ecd";
-				PROVISIONING_PROFILE_SPECIFIER = "小事一桩0618";
+				PROVISIONING_PROFILE = "2547a18e-52d2-418f-ac41-31acae888de4";
+				PROVISIONING_PROFILE_SPECIFIER = OneLittleThingTest0623;
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/shifeng/Desktop/OneLittleThing/CheckName/CheckName-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "";
