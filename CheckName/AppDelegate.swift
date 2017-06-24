@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         // 启动JPushSDK
         JPUSHService.setup(withOption: nil, appKey: "8558fce51ccc13746a837f98",
                            channel: "Publish Channel", apsForProduction: false)
-        
+        // 注意：apsForProduction参数决定了推送适合的环境,false为开发环境
         return true
     }
     

@@ -116,10 +116,34 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.sectionHeaderHeight = 28
-        let setButton = UIButton(frame: CGRect(x: 180, y: 570, width: 60, height: 60))
+        
+        let setButton = UIButton(frame: CGRect(x: 180, y: UIScreen.main.bounds.maxY - 97, width: 60, height: 60))
         setButton.setBackgroundImage(UIImage(named: "设置"), for: .normal)
         setButton.addTarget(self, action: #selector(touchSet), for: .touchUpInside)
         self.tableView.addSubview(setButton)
+        
+        /***
+        ****手动约束存在问题,待解决****
+        ****
+        ****
+        /// 手动为setButton设置约束
+        // 使用AutoLayout约束,禁止将AutoresizingMask转换为约束
+        setButton.translatesAutoresizingMaskIntoConstraints = false
+        // 左侧约束和下方约束
+        let constraintFromLeft = NSLayoutConstraint(item: setButton, attribute: .left, relatedBy: .equal, toItem: self.tableView, attribute: .left, multiplier: 1.0, constant: 180)
+        self.tableView.addConstraint(constraintFromLeft)
+        let constrainFromBottom = NSLayoutConstraint(item: setButton, attribute: .bottom, relatedBy: .equal, toItem: self.tableView, attribute: .bottom, multiplier: 1.0, constant: 300)
+        self.tableView.addConstraint(constrainFromBottom)
+        // 宽高约束
+        let constraintForWidth = NSLayoutConstraint(item: setButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.0, constant: 60)
+        setButton.addConstraint(constraintForWidth)
+        let constraintForHeight = NSLayoutConstraint(item: setButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.0, constant: 60)
+        setButton.addConstraint(constraintForHeight)
+        print("SetButton位置: \(setButton.frame)")
+        ****
+        ****
+        ****手动约束存在问题,待解决****
+        ***/
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -152,12 +176,17 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
                     print("搜索结果: \(self.searchResult)")
                     let json = JSON.init(self.searchResult)
                     print(json)
-                    self.city = json["results"][0]["location"]["name"].string!
-                    self.weather = json["results"][0]["now"]["text"].string!
-                    self.tem = json["results"][0]["now"]["temperature"].string!
-                    
-                    DispatchQueue.main.async {
-                        self.weatherLabel.text = "今日天气:" + "  " +  self.city + "  " + self.weather + "  " + self.tem + "  " + "℃"
+                    if (json["results"].null != nil) { //如果API返回异常值则天气Label不变(比如每小时次数用完)
+                        DispatchQueue.main.async {
+                            self.weatherLabel.text = "你的每一次努力都不应该被辜负"
+                        }
+                    } else {
+                        self.city = json["results"][0]["location"]["name"].string!
+                        self.weather = json["results"][0]["now"]["text"].string!
+                        self.tem = json["results"][0]["now"]["temperature"].string!
+                        DispatchQueue.main.async {
+                            self.weatherLabel.text = "今日天气:" + "  " +  self.city + "  " + self.weather + "  " + self.tem + "  " + "℃"
+                        }
                     }
                 }
                 
