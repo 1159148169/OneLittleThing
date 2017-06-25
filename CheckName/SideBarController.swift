@@ -10,6 +10,8 @@ import UIKit
 import CoreLocation
 import SwiftyJSON
 
+var ifPostMark = 0 //是否发送通知标识,0为发送,1为不发送,全局变量
+
 class SideBarController: UITableViewController,CLLocationManagerDelegate {
     
     @IBOutlet weak var weatherLabel: UILabel!
@@ -76,10 +78,13 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
             if lastLocation.horizontalAccuracy <= locationManager.desiredAccuracy {
                 print("定位精度已经符合要求,可以结束定位!\n")
                 stopLocation()
-                
+                if ifPostMark == 0 { //发送通知
+                    NotificationCenter.default.post(name: self.successGetLocation, object: nil)
+                } else {
+                    //什么也不做
+                }
+                ifPostMark = 1
             }
-            // 通知不应该放在这里,结束定位条件有问题,一直没有触发,待修改
-            NotificationCenter.default.post(name: self.successGetLocation, object: nil)
         }
     }
     
@@ -95,14 +100,14 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
         locationManager.startUpdatingLocation()
         
-        timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(didTimeOut), userInfo: nil, repeats: false) // 设置了一个定时器
+        timer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(didTimeOut), userInfo: nil, repeats: false) // 设置了一个定时器
     }
     
     func stopLocation() {
         locationManager.stopUpdatingLocation()
         locationManager.delegate = nil
         
-        if let timer = timer { // 如果60秒内找到了确定的位置或用户点击了停止按钮，则撤销计时器
+        if let timer = timer { // 如果15秒内找到了确定的位置则撤销计时器
             timer.invalidate()
         }
     }
@@ -111,6 +116,7 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
         print("请求超时")
         if location == nil { // domain是一个错误域，由一个字符串构成，这里我们自定义了一个错误域，之前用过CoreLocation的错误域kCLErrorDomain
             lastLocationError = NSError(domain: "MyLocationsErrorDomain", code: 1, userInfo: nil)
+            stopLocation()
         }
     }
     
@@ -208,6 +214,9 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
         self.location = nil // 临时解决办法
         stopLocation()
         dataTask?.cancel()
+        
+        //删除观察者
+        NotificationCenter.default.removeObserver(self, name: successGetLocation, object: nil)
         
     }
     
