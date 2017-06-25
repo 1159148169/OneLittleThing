@@ -55,6 +55,9 @@ class SetController: UITableViewController {
             // 调用LeanCloud的反馈组件
             let agent = LCUserFeedbackAgent.sharedInstance()
             agent?.showConversations(self, title: nil, contact: nil)
+        } else {
+            let myURL = URL(string: "http://weibo.com/u/1999818521")
+            UIApplication.shared.open(myURL!, options: [:], completionHandler: nil)
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
