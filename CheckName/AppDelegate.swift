@@ -14,8 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     
     var window: UIWindow?
     
+    var lists = [TypeListItem]()
+    var detailLists = [NameItem]()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool { //这个方法允许你在显示app给用户之前执行最后的初始化操作
-//        UIApplication.shared.applicationIconBadgeNumber = 0
+        
         let centre = UNUserNotificationCenter.current() //为了实现UNUserNotificationCenterDelegate协议对应的方法
         centre.delegate = self
         
@@ -29,8 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         AVOSCloud.setApplicationId("CGM6nl02YaWaB2YzzrOjOwBf-gzGzoHsz" ,clientKey: "sHsacdDcvHSLsW6uKY4d4te9")
         
         //极光推送
-        //通知类型（这里将声音、消息给加上，提醒小标暂时不加）
-        let userSettings = UIUserNotificationSettings(types: [.alert, .sound], categories: nil)
+        //通知类型（这里将声音、消息给加上，提醒小标也要加）
+        let userSettings = UIUserNotificationSettings(types: [.alert, .sound, .badge], categories: nil)
         if ((UIDevice.current.systemVersion as NSString).floatValue >= 8.0) {
             //可以添加自定义categories
             JPUSHService.register(forRemoteNotificationTypes: userSettings.types.rawValue,
@@ -46,6 +49,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         JPUSHService.setup(withOption: nil, appKey: "8558fce51ccc13746a837f98",
                            channel: "Publish Channel", apsForProduction: false)
         // 注意：apsForProduction参数决定了推送适合的环境,false为开发环境
+        
+        //获取未完成计划数(必须放在注册通知后,在iOS中只有注册了通知才可以显示应用角标)
+        if UserDefaults.standard.integer(forKey: "GetPlanNotFinished") == 0 {
+            //从.plist文件中获取未完成的计划
+            print("从.plist文件中获取未完成的计划")
+            lists = getTypeName()!
+            var count = 0
+            //两层循环获取具体计划
+            for _ in lists {
+                for detail in lists[count].items {
+                    if !detail.charge { //只有未完成的计划才添加
+                        detailLists.append(detail)
+                    }
+                }
+                count += 1
+            }
+            //保存到UserDefults中并以红点标记显示
+            UserDefaults.standard.set(detailLists.count, forKey: "GetPlanNotFinished")
+            UIApplication.shared.applicationIconBadgeNumber = detailLists.count
+        } else {
+            //从UserDefults中获取未完成的计划并以红点标记显示
+            print("从UserDefults中获取未完成的计划并以红点标记显示")
+            UIApplication.shared.applicationIconBadgeNumber = UserDefaults.standard.integer(forKey: "GetPlanNotFinished")
+        }
+        
         return true
     }
     
@@ -106,5 +134,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         let controller = navigationController.viewControllers[0] as! SuperNameTableViewController
         print(controller.restorationIdentifier!)
         controller.saveChecklist()
+    }
+    
+    func documentsDirectory() -> URL { //获取沙盒文件夹路径
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    func dataFilePath() -> URL { //获取数据文件地址
+        return documentsDirectory().appendingPathComponent("Checklists.plist")
+    }
+    func getTypeName() -> [TypeListItem]? {
+        //获取本地文件数据地址
+        let path = dataFilePath()
+        if let data = try? Data(contentsOf: path) { //try命令试图创建一个Data对象,如果创建失败就返回nil
+            //解码器
+            let unarchiver = NSKeyedUnarchiver(forReadingWith: data)
+            //通过归档时设置的关键字还原lists
+            lists = unarchiver.decodeObject(forKey: "Checklists") as! [TypeListItem]
+            //结束编码
+            unarchiver.finishDecoding()
+        }
+        return lists
     }
 }

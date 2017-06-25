@@ -119,6 +119,12 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
                 if strongSelf.typeNames.items.count == 0 { //每次删除cell后调用tableView.reloadData()特别消耗资源,这里做了优化
                     tableView.reloadData()
                 }
+                
+                //获取未完成的计划数并修改,同时修改提醒小红点
+                let planNotDone = UserDefaults.standard.integer(forKey: "GetPlanNotFinished")
+                UserDefaults.standard.set(planNotDone - 1, forKey: "GetPlanNotFinished")
+                UIApplication.shared.applicationIconBadgeNumber = planNotDone - 1
+                
                 return true
             } else {
                 return false
@@ -134,6 +140,11 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
                 self.configureCheckmark(for: cell, at: indexPath)
                 tableView.reloadData()
                 
+                //获取未完成的计划数并修改,同时修改提醒小红点
+                let planNotDone = UserDefaults.standard.integer(forKey: "GetPlanNotFinished")
+                UserDefaults.standard.set(planNotDone + 1, forKey: "GetPlanNotFinished")
+                UIApplication.shared.applicationIconBadgeNumber = planNotDone + 1
+                
                 return true
             })]
             cell.leftSwipeSettings.transition = MGSwipeTransition.clipCenter
@@ -144,6 +155,11 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
                 item.toggleCharge()
                 self.configureCheckmark(for: cell, at: indexPath)
                 tableView.reloadData()
+                
+                //获取未完成的计划数并修改,同时修改提醒小红点
+                let planNotDone = UserDefaults.standard.integer(forKey: "GetPlanNotFinished")
+                UserDefaults.standard.set(planNotDone - 1, forKey: "GetPlanNotFinished")
+                UIApplication.shared.applicationIconBadgeNumber = planNotDone - 1
                 
                 let planFinishedNum = UserDefaults.standard.integer(forKey: "PlanAllFinishedNum")
                 UserDefaults.standard.set(planFinishedNum + 1, forKey: "PlanAllFinishedNum") // 从0开始

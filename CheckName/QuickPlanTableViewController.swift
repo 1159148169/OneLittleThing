@@ -151,6 +151,12 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
             if self.allType[self.count].items.count == 0 { //每次删除cell后调用tableView.reloadData()特别消耗资源,这里做了优化
                 tableView.reloadData()
             }
+            
+            //获取未完成的计划数并修改,同时修改提醒小红点
+            let planNotDone = UserDefaults.standard.integer(forKey: "GetPlanNotFinished")
+            UserDefaults.standard.set(planNotDone - 1, forKey: "GetPlanNotFinished")
+            UIApplication.shared.applicationIconBadgeNumber = planNotDone - 1
+            
             return true
         })]
         cell.rightSwipeSettings.transition = MGSwipeTransition.clipCenter
@@ -163,6 +169,27 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
                 self.configureCheckmark(for: cell, at: indexPath)
                 tableView.reloadData()
                 
+                //获取未完成的计划数并修改,同时修改提醒小红点
+                let planNotDone = UserDefaults.standard.integer(forKey: "GetPlanNotFinished")
+                UserDefaults.standard.set(planNotDone + 1, forKey: "GetPlanNotFinished")
+                UIApplication.shared.applicationIconBadgeNumber = planNotDone + 1
+                
+                return true
+            })]
+            cell.leftSwipeSettings.transition = MGSwipeTransition.clipCenter
+        } else {
+            cell.leftButtons = [MGSwipeButton(title: "已完成", backgroundColor: UIColor.darkGray, callback: {
+                (sender: MGSwipeTableCell!) -> Bool in
+                print("Convenience callback for swipe leftButtons!")
+                item.toggleCharge()
+                self.configureCheckmark(for: cell, at: indexPath)
+                tableView.reloadData()
+                
+                //获取未完成的计划数并修改,同时修改提醒小红点
+                let planNotDone = UserDefaults.standard.integer(forKey: "GetPlanNotFinished")
+                UserDefaults.standard.set(planNotDone - 1, forKey: "GetPlanNotFinished")
+                UIApplication.shared.applicationIconBadgeNumber = planNotDone - 1
+                
                 let planFinishedNum = UserDefaults.standard.integer(forKey: "PlanAllFinishedNum")
                 UserDefaults.standard.set(planFinishedNum + 1, forKey: "PlanAllFinishedNum") // 从0开始
                 
@@ -173,7 +200,7 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
                     archivement.title = "经验宝宝"
                     archivement.subTitle = "完成了10个计划后获得"
                     archivement.picURL = ""
-//                    archivement.kind = 20010
+                    //                    archivement.kind = 20010
                     
                     // 先从UserDefults中读取成就数据
                     if UserDefaults.standard.array(forKey: "Archive") == nil {
@@ -201,7 +228,7 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
                     archivement.title = "浪里个浪"
                     archivement.subTitle = "完成了50个计划后获得"
                     archivement.picURL = ""
-//                    archivement.kind = 20050
+                    //                    archivement.kind = 20050
                     
                     // 先从UserDefults中读取成就数据
                     if UserDefaults.standard.array(forKey: "Archive") == nil {
@@ -229,7 +256,7 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
                     archivement.title = "计划达人"
                     archivement.subTitle = "完成了100个计划后获得"
                     archivement.picURL = ""
-//                    archivement.kind = 20100
+                    //                    archivement.kind = 20100
                     
                     // 先从UserDefults中读取成就数据
                     if UserDefaults.standard.array(forKey: "Archive") == nil {
@@ -257,7 +284,7 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
                     archivement.title = "走火入魔"
                     archivement.subTitle = "完成了500个计划后获得"
                     archivement.picURL = ""
-//                    archivement.kind = 20500
+                    //                    archivement.kind = 20500
                     
                     // 先从UserDefults中读取成就数据
                     if UserDefaults.standard.array(forKey: "Archive") == nil {
@@ -285,7 +312,7 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
                     archivement.title = "6得不行"
                     archivement.subTitle = "完成了1000个计划后获得"
                     archivement.picURL = ""
-//                    archivement.kind = 21000
+                    //                    archivement.kind = 21000
                     
                     // 先从UserDefults中读取成就数据
                     if UserDefaults.standard.array(forKey: "Archive") == nil {
@@ -310,17 +337,6 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
                 default:
                     break
                 }
-                
-                return true
-            })]
-            cell.leftSwipeSettings.transition = MGSwipeTransition.clipCenter
-        } else {
-            cell.leftButtons = [MGSwipeButton(title: "已完成", backgroundColor: UIColor.darkGray, callback: {
-                (sender: MGSwipeTableCell!) -> Bool in
-                print("Convenience callback for swipe leftButtons!")
-                item.toggleCharge()
-                self.configureCheckmark(for: cell, at: indexPath)
-                tableView.reloadData()
                 
                 return true
             })]

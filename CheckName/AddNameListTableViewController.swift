@@ -62,7 +62,7 @@ class AddNameListTableViewController: UITableViewController,UITextFieldDelegate 
         
         if switchControl.isOn {
             let center = UNUserNotificationCenter.current()
-            center.requestAuthorization(options: [.alert, .sound]) { //iOS10向用户申请通知权限
+            center.requestAuthorization(options: [.alert, .sound, .badge]) { //iOS10向用户申请通知权限
                 
                 granted, error in /* do nothing */
                 
@@ -160,6 +160,11 @@ class AddNameListTableViewController: UITableViewController,UITextFieldDelegate 
             newName.scheduleNotification()
             
             hudView.text = "已添加"
+            
+            //获取未完成的计划数并修改,同时修改提醒小红点
+            let planNotDone = UserDefaults.standard.integer(forKey: "GetPlanNotFinished")
+            UserDefaults.standard.set(planNotDone + 1, forKey: "GetPlanNotFinished")
+            UIApplication.shared.applicationIconBadgeNumber = planNotDone + 1
             
             if ifAddToAppleCalendar.isOn {
                 let eventStore = EKEventStore()

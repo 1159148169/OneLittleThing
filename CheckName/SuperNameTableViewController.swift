@@ -115,6 +115,10 @@ class SuperNameTableViewController: UITableViewController,AddNewListTypeDelegate
             if self.lists.count == 0 { //每次删除cell后调用tableView.reloadData()特别消耗资源,这里做了优化
                 tableView.reloadData()
             }
+            //删除整个类别下的计划数目(改变应用角标)
+            let planNotDone = UserDefaults.standard.integer(forKey: "GetPlanNotFinished")
+            UserDefaults.standard.set(planNotDone - self.lists[cellIndexPath.row].items.count, forKey: "GetPlanNotFinished")
+            UIApplication.shared.applicationIconBadgeNumber = planNotDone - self.lists[cellIndexPath.row].items.count
             return true
         })]
         

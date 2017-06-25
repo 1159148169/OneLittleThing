@@ -78,6 +78,7 @@ class SideBarController: UITableViewController,CLLocationManagerDelegate {
                 stopLocation()
                 
             }
+            // 通知不应该放在这里,结束定位条件有问题,一直没有触发,待修改
             NotificationCenter.default.post(name: self.successGetLocation, object: nil)
         }
     }
