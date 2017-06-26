@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Kingfisher
+import SafariServices
 
 class HistoryOnTodayTableViewController: UITableViewController {
     
@@ -74,6 +75,14 @@ class HistoryOnTodayTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let urlString = "https://www.baidu.com/ssid=d9e9494d4f4b5346944d/from=844b/s?word=\(history[indexPath.row].title)&sa=tb&ts=3926210&t_kt=0&ie=utf-8&rsv_t=42a3Z9RyeTlucF2F5DEpQWtXI%252BXOVBR2fQjw3v7Z6ZbcNQ4lWvMBXahw2w&ms=1&rsv_pq=13297195502382807656&ss=100&t_it=1&rqlang=zh&rsv_sug4=1083&inputT=174&oq=66"
+        let newURLString = urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlFragmentAllowed) //URL中的中文和其它特殊字符需要进行转码,否则URL返回一个nil
+        let cellURL = URL(string: newURLString!)
+        print("cellURL: \(cellURL!)")
+        let safariVC = SFSafariViewController(url: cellURL!)
+        self.show(safariVC, sender: nil)
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
