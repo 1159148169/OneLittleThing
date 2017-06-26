@@ -51,6 +51,7 @@
 		8B88201A1E2B832000CE851A /* TimePlanTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8820191E2B832000CE851A /* TimePlanTableViewController.swift */; };
 		8B88201C1E2B833400CE851A /* ImportantPlanTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B88201B1E2B833400CE851A /* ImportantPlanTableViewController.swift */; };
 		8B8C1B0C1DD0B534002AA63D /* NameListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8C1B0B1DD0B534002AA63D /* NameListItem.swift */; };
+		8BADC1DD1F00E23900359653 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BADC1DC1F00E23900359653 /* Kingfisher.framework */; };
 		8BC0712F1DCB5A0200A3BFA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC0712E1DCB5A0200A3BFA3 /* AppDelegate.swift */; };
 		8BC071341DCB5A0200A3BFA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BC071321DCB5A0200A3BFA3 /* Main.storyboard */; };
 		8BC071361DCB5A0200A3BFA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BC071351DCB5A0200A3BFA3 /* Assets.xcassets */; };
@@ -114,6 +115,7 @@
 		8B8820191E2B832000CE851A /* TimePlanTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePlanTableViewController.swift; sourceTree = "<group>"; };
 		8B88201B1E2B833400CE851A /* ImportantPlanTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportantPlanTableViewController.swift; sourceTree = "<group>"; };
 		8B8C1B0B1DD0B534002AA63D /* NameListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameListItem.swift; sourceTree = "<group>"; };
+		8BADC1DC1F00E23900359653 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		8BC0712B1DCB5A0200A3BFA3 /* CheckName.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheckName.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC0712E1DCB5A0200A3BFA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BC071331DCB5A0200A3BFA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				8B31005D1EF6CD4F00E741E7 /* CFNetwork.framework in Frameworks */,
 				8BCC1AEBC118CB1D0BF4D7B3 /* libPods-CheckName.a in Frameworks */,
 				8B31005A1EF6CCAE00E741E7 /* jcore-ios-1.1.3.a in Frameworks */,
+				8BADC1DD1F00E23900359653 /* Kingfisher.framework in Frameworks */,
 				8B20CEFF1EDAF40500E858EE /* Alamofire.framework in Frameworks */,
 				8B31005B1EF6CCAF00E741E7 /* jpush-ios-3.0.5.a in Frameworks */,
 				8B20CF011EDAF40D00E858EE /* SwiftyJSON.framework in Frameworks */,
@@ -155,6 +158,7 @@
 		134F6653B6FA26132F649B71 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8BADC1DC1F00E23900359653 /* Kingfisher.framework */,
 				8B31006E1EF6CDC800E741E7 /* libresolv.tbd */,
 				8B31006C1EF6CDB600E741E7 /* libz.tbd */,
 				8B31006A1EF6CDAB00E741E7 /* Security.framework */,
@@ -437,6 +441,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 			);
 			outputPaths = (
 			);
@@ -655,8 +660,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shifeng.onelittlething;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2547a18e-52d2-418f-ac41-31acae888de4";
-				PROVISIONING_PROFILE_SPECIFIER = OneLittleThingTest0623;
+				PROVISIONING_PROFILE = "63b52237-f7a5-4667-b5a6-ece6611670e0";
+				PROVISIONING_PROFILE_SPECIFIER = OneLittleThingStore0625;
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/shifeng/Desktop/OneLittleThing/CheckName/CheckName-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -685,8 +690,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shifeng.onelittlething;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2547a18e-52d2-418f-ac41-31acae888de4";
-				PROVISIONING_PROFILE_SPECIFIER = OneLittleThingTest0623;
+				PROVISIONING_PROFILE = "63b52237-f7a5-4667-b5a6-ece6611670e0";
+				PROVISIONING_PROFILE_SPECIFIER = OneLittleThingStore0625;
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/shifeng/Desktop/OneLittleThing/CheckName/CheckName-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "";

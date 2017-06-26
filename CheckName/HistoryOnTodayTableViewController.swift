@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Kingfisher
 
 class HistoryOnTodayTableViewController: UITableViewController {
     
@@ -50,14 +51,26 @@ class HistoryOnTodayTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath)
-        // Configure the cell...
-        let titleLabel = cell.viewWithTag(5212) as! UILabel
-        let dateLabel = cell.viewWithTag(5211) as! UILabel
-        titleLabel.text = history[indexPath.row].title
-        dateLabel.text = history[indexPath.row].year + "年" + String(history[indexPath.row].month) + "月" + String(history[indexPath.row].day) +  "日"
-
-        return cell
+        if history[indexPath.row].img == "" {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath)
+            let titleLabel = cell.viewWithTag(5212) as! UILabel
+            let dateLabel = cell.viewWithTag(5211) as! UILabel
+            titleLabel.text = history[indexPath.row].title
+            dateLabel.text = history[indexPath.row].year + "年" + String(history[indexPath.row].month) + "月" + String(history[indexPath.row].day) +  "日"
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCellWithImg", for: indexPath)
+            let historyImg = cell.viewWithTag(5233) as! UIImageView
+            let titleLabel = cell.viewWithTag(5232) as! UILabel
+            let dateLabel = cell.viewWithTag(5231) as! UILabel
+            titleLabel.text = history[indexPath.row].title
+            dateLabel.text = history[indexPath.row].year + "年" + String(history[indexPath.row].month) + "月" + String(history[indexPath.row].day) +  "日"
+            let imgURL = URL(string: history[indexPath.row].img)
+            historyImg.kf.setImage(with: imgURL)
+            historyImg.layer.cornerRadius = 10
+            historyImg.layer.masksToBounds = true
+            return cell
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -83,6 +96,11 @@ class HistoryOnTodayTableViewController: UITableViewController {
                     historyData.month = list[i]["month"].int!
                     historyData.year = list[i]["year"].string!
                     historyData.day = list[i]["day"].int!
+                    if (list[i]["img"].null != nil) {
+                        historyData.img = ""
+                    } else {
+                        historyData.img = list[i]["img"].string!
+                    }
                     self.history.append(historyData)
                 }
                 self.tableView.reloadData()

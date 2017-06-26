@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         
         // 启动JPushSDK
         JPUSHService.setup(withOption: nil, appKey: "8558fce51ccc13746a837f98",
-                           channel: "Publish Channel", apsForProduction: false)
+                           channel: "Publish Channel", apsForProduction: true)
         // 注意：apsForProduction参数决定了推送适合的环境,false为开发环境
         
         //获取未完成计划数(必须放在注册通知后,在iOS中只有注册了通知才可以显示应用角标)

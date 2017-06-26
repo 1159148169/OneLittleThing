@@ -13,4 +13,5 @@ class History {
     var month = 0
     var year = ""
     var day = 0
+    var img = ""
 }
