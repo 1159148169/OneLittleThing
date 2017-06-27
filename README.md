@@ -1,6 +1,6 @@
 小事一桩
 ==============
-### Checklist的上架版本(App Store当前版本1.3)
+### Checklist的上架版本([App Store](https://itunes.apple.com/cn/app/%E5%B0%8F%E4%BA%8B%E4%B8%80%E6%A1%A9/id1209752906)当前版本2.1)
 
 基本功能及涉及到的知识点:
 ==============
@@ -20,14 +20,20 @@
 * 界面改版，看起来顺眼了一些（1.0）；
 * 新增侧滑界面（1.0）；
 * 增加了时间线、快速计划、重要计划三个分类（1.0）；
-* 在侧滑界面新增了天气显示，定位服务使用CoreLocation，网络请求使用URLSession，天气信息的接口是一个朋友提供的，非常感谢（1.1）！
+* 在侧滑界面新增了天气显示，定位服务使用CoreLocation，网络请求使用URLSession，天气信息的接口由[心知天气](https://www.seniverse.com/)提供（1.1）；
 * 新增计划或更新计划时会弹出一个HUD视图，提升了用户体验（1.2）；
 * 完成计划后新增了删除线，去除了重要计划红色标注，红色标注导致整体不够协调（1.2）；
 * 新增了左滑完成计划，点击计划弹出新的ViewController来显示计划详情，使用自定义转场实现（1.2）；
 * 新增了将计划添加到系统日历（1.3）；
-* 新增了NavigationBanner（1.4）；
-* 新增了引导页（1.4）；
-* 新增了选择计划类别页面的视察滚动效果（1.4）（感谢[Krishan](https://blog.krishan711.com/)）。
+* 新增了NavigationBanner（2.0）；
+* 新增了引导页（2.0）；
+* 新增了选择计划类别页面的视察滚动效果（2.0）（感谢[Krishan](https://blog.krishan711.com/)）；
+* 新增了成就系统，依据做计划和完成计划的数量达成成就（2.0）；
+* 新增了历史上的今天模块，接口由[易源数据](https://www.showapi.com/)提供（2.0）；
+* 新增了远程推送，由[极光推送](https://www.jiguang.cn/)提供技术支持（2.1）；
+* 新增了应用内反馈，使用LeanCloud的[开源反馈组件](https://leancloud.cn/docs/feedback.html)（2.1）；
+* 新增了Icon角标显示未完成计划数（2.1）；
+* 历史上的今天加入图片显示（API本身提供），点击进入百度搜索详情（2.2）；
 
 使用的第三方库（对牛X的作者表示由衷的感谢）：
 ==============
@@ -40,6 +46,11 @@
 * [TextFieldEffects](https://github.com/raulriera/TextFieldEffects)：UITextField的扩展，增加了一些好看的效果；
 * [SWRevealViewController](https://github.com/John-Lluch/SWRevealViewController)：通过简单的步骤实现一个侧滑页面；
 * [BRYXBanner](https://github.com/bryx-inc/BRYXBanner)：简单易用的NavigationBanner；
-* [KSGuideController](https://github.com/skx926/KSGuideController)：基于UIView的一个新手引导页。
+* [KSGuideController](https://github.com/skx926/KSGuideController)：基于UIView的一个新手引导页；
+* [SwiftNotice](https://github.com/johnlui/SwiftNotice)：一行代码实现一个HUD；
+* [KSGuideController](https://github.com/skx926/KSGuideController)：一个漂亮的新手引导库；
+* [Alamofire](https://github.com/Alamofire/Alamofire)：这个不用说了，Swift最强大的网络处理库；
+* [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON)：Swift下最简单的处理JSON数据的库；
+* [Kingfisher](https://github.com/onevcat/Kingfisher)：喵神大大的作品，纯Swift的图片下载和缓存库。
 
 还有一些其他的想法，比如启动页，注册登录等等杂七杂八的功能，再慢慢往上加。

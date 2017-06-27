@@ -133,20 +133,20 @@ class SwiftNotice: NSObject {
             window.transform = CGAffineTransform(rotationAngle: CGFloat(degree * Double.pi / 180))
         }
         
-        window.windowLevel = UIWindowLevelStatusBar
+        window.windowLevel = UIWindowLevelStatusBar //UIWindow的层级
         window.isHidden = false
         window.addSubview(view)
         windows.append(window)
       
-        var origPoint = view.frame.origin
+        var origPoint = view.frame.origin //确定初始位置
         origPoint.y = -(view.frame.size.height)
-        let destPoint = view.frame.origin
+        let destPoint = view.frame.origin //确定最终位置
         view.tag = sn_topBar
       
         view.frame = CGRect(origin: origPoint, size: view.frame.size)
         UIView.animate(withDuration: 0.3, animations: {
           view.frame = CGRect(origin: destPoint, size: view.frame.size)
-        }, completion: { b in
+        }, completion: { b in //闭包判断是否需要自动消失
           if autoClear {
               let selector = #selector(SwiftNotice.hideNotice(_:))
               self.perform(selector, with: window, afterDelay: TimeInterval(autoClearTime))
