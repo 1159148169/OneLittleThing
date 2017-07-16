@@ -73,6 +73,14 @@ enum NoticeType{
     case info
 }
 
+/**********************************************************************************************
+ 静态方法与静态变量一样，属于类本身，而不属于那个类的一个对象。 调用一个被定义为static的方法，可以通过在它前面加上这
+ 个类的名称，也可以像调用非静态方法一样通过类对象调用。 实例方法必须通过类的实例来使用。 实例方法可以使用类的非静态成
+ 员，也可以使用类的静态成员。
+ 在方法的func关键字之前加上关键字static或者class都可以用于指定类方法，不同的是用class关键字指定的类方法可以被子类
+ 重写，但是用static关键字指定的类方法是不能被子类重写的。
+ *********************************************************************************************/
+
 class SwiftNotice: NSObject {
     
     static var windows = Array<UIWindow!>()
@@ -156,7 +164,7 @@ class SwiftNotice: NSObject {
     }
     
     @discardableResult
-    static func wait(_ imageNames: Array<UIImage> = Array<UIImage>(), timeInterval: Int = 0) -> UIWindow {
+    static func wait(_ imageNames: Array<UIImage> = Array<UIImage>(), timeInterval: Int = 0) -> UIWindow { //参数为可选参数，调用时没有参数即使用默认参数
         let frame = CGRect(x: 0, y: 0, width: 78, height: 78)
         let window = UIWindow()
         window.backgroundColor = UIColor.clear
@@ -220,17 +228,19 @@ class SwiftNotice: NSObject {
         
         let label = UILabel()
         label.text = text
-        label.numberOfLines = 0
+        label.numberOfLines = 0 //不限制行数
         label.font = UIFont.systemFont(ofSize: 13)
         label.textAlignment = NSTextAlignment.center
         label.textColor = UIColor.white
         label.sizeToFit()
         mainView.addSubview(label)
         
-        let superFrame = CGRect(x: 0, y: 0, width: label.frame.width + 50 , height: label.frame.height + 30)
+        let superFrame = CGRect(x: 0, y: 0, width: label.frame.width + 50 , height: label.frame.height + 30) //父界面布局根据label的大小动态改变
         window.frame = superFrame
         mainView.frame = superFrame
         
+        
+        //以下两行代码仍然有疑问
         label.center = mainView.center
         window.center = rv!.center
         
@@ -317,19 +327,19 @@ class SwiftNotice: NSObject {
     static func hideNotice(_ sender: AnyObject) {
         if let window = sender as? UIWindow {
           
-          if let v = window.subviews.first {
+          if let v = window.subviews.first { //获取window的第一个子view并将它消失(动画效果)
             UIView.animate(withDuration: 0.2, animations: {
               
-              if v.tag == sn_topBar {
-                v.frame = CGRect(x: 0, y: -v.frame.height, width: v.frame.width, height: v.frame.height)
+              if v.tag == sn_topBar { //再次确定view的tag(确定是否是StatusNotice)
+                v.frame = CGRect(x: 0, y: -v.frame.height, width: v.frame.width, height: v.frame.height) //移出屏幕
               }
-              v.alpha = 0
+              v.alpha = 0 //变为透明
             }, completion: { b in
               
-              if let index = windows.index(where: { (item) -> Bool in
+              if let index = windows.index(where: { (item) -> Bool in //这里用到了Swift数组的index方法，参数是一个闭包，只有参数和window相同时返回真，找到window在windows中的下标
                   return item == window
               }) {
-                  windows.remove(at: index)
+                  windows.remove(at: index) //从视图数组中移除视图
               }
             })
           }
