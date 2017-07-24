@@ -112,19 +112,20 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
             if let strongSelf = self {
                 print("Convenience callback for swipe rightButtons!")
                 let cellIndexPath = strongSelf.tableView.indexPath(for: cell)!
-                strongSelf.typeNames.items[cellIndexPath.row].removeNotification()
-                strongSelf.typeNames.items.remove(at: cellIndexPath.row)
-                let indexPaths = [cellIndexPath]
-                tableView.deleteRows(at: indexPaths, with: .fade)
-                if strongSelf.typeNames.items.count == 0 { //每次删除cell后调用tableView.reloadData()特别消耗资源,这里做了优化
-                    tableView.reloadData()
-                }
                 
                 //获取未完成的计划数并修改,同时修改提醒小红点(注意:已完成的计划再次删除不修改小红点!)
                 if strongSelf.typeNames.items[cellIndexPath.row].charge == false {
                     let planNotDone = UserDefaults.standard.integer(forKey: "GetPlanNotFinished")
                     UserDefaults.standard.set(planNotDone - 1, forKey: "GetPlanNotFinished")
                     UIApplication.shared.applicationIconBadgeNumber = planNotDone - 1
+                }
+                
+                strongSelf.typeNames.items[cellIndexPath.row].removeNotification()
+                strongSelf.typeNames.items.remove(at: cellIndexPath.row)
+                let indexPaths = [cellIndexPath]
+                tableView.deleteRows(at: indexPaths, with: .fade)
+                if strongSelf.typeNames.items.count == 0 { //每次删除cell后调用tableView.reloadData()特别消耗资源,这里做了优化
+                    tableView.reloadData()
                 }
                 
                 return true

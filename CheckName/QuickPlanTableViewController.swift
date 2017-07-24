@@ -144,19 +144,20 @@ class QuickPlanTableViewController: UITableViewController,DZNEmptyDataSetSource,
             (sender: MGSwipeTableCell!) -> Bool in
             print("Convenience callback for swipe buttons!")
             let cellIndexPath = self.tableView.indexPath(for: cell)!
+            
+            //获取未完成的计划数并修改,同时修改提醒小红点(注意:已完成的计划再次删除不修改小红点!)
+            if self.allType[self.count].items[cellIndexPath.row].charge == false {
+                let planNotDone = UserDefaults.standard.integer(forKey: "GetPlanNotFinished")
+                UserDefaults.standard.set(planNotDone - 1, forKey: "GetPlanNotFinished")
+                UIApplication.shared.applicationIconBadgeNumber = planNotDone - 1
+            }
+            
             self.allType[self.count].items.remove(at: cellIndexPath.row)
             let indexPaths = [cellIndexPath]
             tableView.deleteRows(at: indexPaths, with: .fade)
             self.saveChecklist()
             if self.allType[self.count].items.count == 0 { //每次删除cell后调用tableView.reloadData()特别消耗资源,这里做了优化
                 tableView.reloadData()
-            }
-            
-            //获取未完成的计划数并修改,同时修改提醒小红点(注意:已完成的计划再次删除不修改小红点!)
-            if self.allType[self.count].items.charge == false {
-                let planNotDone = UserDefaults.standard.integer(forKey: "GetPlanNotFinished")
-                UserDefaults.standard.set(planNotDone - 1, forKey: "GetPlanNotFinished")
-                UIApplication.shared.applicationIconBadgeNumber = planNotDone - 1
             }
             
             return true
