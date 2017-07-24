@@ -120,10 +120,12 @@ class CheckNameTableViewController: UITableViewController,AddItemViewControllerD
                     tableView.reloadData()
                 }
                 
-                //获取未完成的计划数并修改,同时修改提醒小红点
-                let planNotDone = UserDefaults.standard.integer(forKey: "GetPlanNotFinished")
-                UserDefaults.standard.set(planNotDone - 1, forKey: "GetPlanNotFinished")
-                UIApplication.shared.applicationIconBadgeNumber = planNotDone - 1
+                //获取未完成的计划数并修改,同时修改提醒小红点(注意:已完成的计划再次删除不修改小红点!)
+                if strongSelf.typeNames.items[cellIndexPath.row].charge == false {
+                    let planNotDone = UserDefaults.standard.integer(forKey: "GetPlanNotFinished")
+                    UserDefaults.standard.set(planNotDone - 1, forKey: "GetPlanNotFinished")
+                    UIApplication.shared.applicationIconBadgeNumber = planNotDone - 1
+                }
                 
                 return true
             } else {

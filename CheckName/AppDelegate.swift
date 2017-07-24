@@ -74,6 +74,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
             UIApplication.shared.applicationIconBadgeNumber = UserDefaults.standard.integer(forKey: "GetPlanNotFinished")
         }
         
+        //自动更新错误的角标值(将实际UserDefults中的值与实际完成的计划作比较,如果不一致,以实际完成的计划为准)(增大了I/O,历史遗留问题)
+        print("从.plist文件中获取未完成的计划")
+        lists = getTypeName()!
+        var count = 0
+        //两层循环获取具体计划
+        for _ in lists {
+            for detail in lists[count].items {
+                if !detail.charge { //只有未完成的计划才添加
+                    detailLists.append(detail)
+                }
+            }
+            count += 1
+        }
+        if UserDefaults.standard.integer(forKey: "GetPlanNotFinished") != count {
+            UserDefaults.standard.set(count, forKey: "GetPlanNotFinished")
+            UIApplication.shared.applicationIconBadgeNumber = UserDefaults.standard.integer(forKey: "GetPlanNotFinished")
+        }
+        
         return true
     }
     
